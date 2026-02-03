@@ -15,7 +15,7 @@ export default function PlayerHeader({ player, rank }: Props) {
       <div className={styles.nameSection}>
         <h1 className={styles.name}>{player.name}</h1>
         <p className={styles.subtitle}>
-          Rank #{rank} &bull; {player.elo} Elo
+          Rank #{rank} | {player.elo} Elo
         </p>
       </div>
       <div className={styles.divider} />
@@ -23,11 +23,11 @@ export default function PlayerHeader({ player, rank }: Props) {
         <span>
           {player.wins}-{player.losses} Record
         </span>
-        <span className={styles.separator}>&bull;</span>
+        <span className={styles.separator}>|</span>
         <span>{formatWinPercentage(player.winPercentage)} Win%</span>
-        <span className={styles.separator}>&bull;</span>
+        <span className={styles.separator}>|</span>
         <span>{player.gamesPlayed} Games</span>
-        <span className={styles.separator}>&bull;</span>
+        <span className={styles.separator}>|</span>
         <span
           className={
             streak.type === 'win'

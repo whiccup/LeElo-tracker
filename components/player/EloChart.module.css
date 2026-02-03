@@ -5,12 +5,14 @@
 .svg {
   width: 100%;
   height: auto;
-  max-height: 300px;
+  max-height: 250px;
+  border: 1px solid var(--border-default);
 }
 
 .placeholder {
-  padding: var(--space-2xl) var(--space-lg);
+  padding: 8px;
   color: var(--text-secondary);
   font-size: var(--text-sm);
   margin-top: var(--space-md);
+  font-style: italic;
 }

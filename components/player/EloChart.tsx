@@ -68,8 +68,7 @@ export default function EloChart({ eloHistory }: Props) {
             y1={tick.y}
             x2={width - padding.right}
             y2={tick.y}
-            stroke="var(--border-default)"
-            strokeDasharray="4 4"
+            stroke="#c0c0c0"
           />
         ))}
 
@@ -81,8 +80,8 @@ export default function EloChart({ eloHistory }: Props) {
             y={tick.y + 4}
             textAnchor="end"
             fontSize="12"
-            fill="var(--text-secondary)"
-            fontFamily="var(--font-mono)"
+            fill="#54595d"
+            fontFamily="'Times New Roman', serif"
           >
             {tick.elo}
           </text>
@@ -96,8 +95,8 @@ export default function EloChart({ eloHistory }: Props) {
             y={height - 8}
             textAnchor="middle"
             fontSize="11"
-            fill="var(--text-secondary)"
-            fontFamily="var(--font-sans)"
+            fill="#54595d"
+            fontFamily="'Times New Roman', serif"
           >
             {label.label}
           </text>
@@ -107,34 +106,9 @@ export default function EloChart({ eloHistory }: Props) {
         <polyline
           points={points}
           fill="none"
-          stroke="var(--accent-blue)"
-          strokeWidth="2"
-          strokeLinejoin="round"
+          stroke="#000000"
+          strokeWidth="1.5"
         />
-
-        {/* Data points */}
-        {eloHistory.map((p, i) => {
-          // Determine if this was a gain or loss from previous
-          const prevElo = i > 0 ? eloHistory[i - 1].elo : p.elo;
-          const isGain = p.elo >= prevElo;
-          return (
-            <circle
-              key={p.gameId}
-              cx={padding.left + i * xStep}
-              cy={yScale(p.elo)}
-              r="4"
-              fill={
-                i === 0
-                  ? 'var(--accent-blue)'
-                  : isGain
-                    ? 'var(--accent-green)'
-                    : 'var(--accent-red)'
-              }
-              stroke="var(--bg-secondary)"
-              strokeWidth="1.5"
-            />
-          );
-        })}
       </svg>
     </div>
   );

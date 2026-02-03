@@ -14,7 +14,7 @@
 }
 
 .retry {
-  font-family: var(--font-sans);
+  font-family: inherit;
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
   color: var(--accent-blue);
@@ -22,9 +22,9 @@
   border: none;
   padding: 0;
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .retry:hover {
-  text-decoration: underline;
+  color: var(--accent-blue-hover);
 }

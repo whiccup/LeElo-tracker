@@ -3,17 +3,12 @@
   white-space: nowrap;
 }
 
-.header:hover {
-  color: #034694;
-}
-
 .header:hover .label {
   text-decoration: underline;
 }
 
 .active {
-  color: #034694;
-  font-weight: var(--font-bold);
+  font-weight: 700;
 }
 
 .label {
@@ -23,11 +18,11 @@
 }
 
 .arrow {
-  font-size: 12px;
+  font-size: 10px;
   line-height: 1;
 }
 
 .header:focus-visible {
-  outline: 2px solid var(--accent-blue);
-  outline-offset: -2px;
+  outline: 1px dotted;
+  outline-offset: -1px;
 }

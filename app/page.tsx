@@ -11,9 +11,9 @@ export default async function HomePage() {
   });
 
   return (
-    <main className="content-wrapper">
+    <main>
       <div className="section-header">
-        <h2>Player Rankings</h2>
+        <h2>Player Rankings<span style={{ fontSize: '11px', fontWeight: 400, color: '#0645ad', marginLeft: '8px' }}>[edit]</span></h2>
         <span className="section-meta">Last Updated: {today}</span>
       </div>
       <RankingsTable players={players} />
