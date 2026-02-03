@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-const editSpan = <span style={{ fontSize: '11px', fontWeight: 400, color: '#0645ad', marginLeft: '8px' }}>[edit]</span>;
+
 
 export default async function PlayerDetailPage({ params }: Props) {
   const { id } = params;
@@ -72,7 +72,7 @@ export default async function PlayerDetailPage({ params }: Props) {
       <PlayerHeader player={player} rank={rank} />
 
       <div className="section-header">
-        <h2>Career Stats{editSpan}</h2>
+        <h2>Career Stats</h2>
       </div>
       <table className={styles.statsTable}>
         <tbody>
@@ -110,12 +110,12 @@ export default async function PlayerDetailPage({ params }: Props) {
       </table>
 
       <div className="section-header">
-        <h2>Elo Rating Over Time{editSpan}</h2>
+        <h2>Elo Rating Over Time</h2>
       </div>
       <EloChart eloHistory={player.eloHistory} />
 
       <div className="section-header">
-        <h2>Game History{editSpan}</h2>
+        <h2>Game History</h2>
       </div>
       <GameHistoryTable games={games} />
     </main>

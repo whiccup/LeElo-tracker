@@ -1,5 +1,6 @@
 import { getPlayers } from '@/lib/data';
 import RankingsTable from '@/components/rankings/RankingsTable';
+import RefreshButton from '@/components/ui/RefreshButton';
 
 export default async function HomePage() {
   const players = await getPlayers();
@@ -13,8 +14,8 @@ export default async function HomePage() {
   return (
     <main>
       <div className="section-header">
-        <h2>Player Rankings<span style={{ fontSize: '11px', fontWeight: 400, color: '#0645ad', marginLeft: '8px' }}>[edit]</span></h2>
-        <span className="section-meta">Last Updated: {today}</span>
+        <h2>Player Rankings</h2>
+        <span className="section-meta">Last Updated: {today} <RefreshButton /></span>
       </div>
       <RankingsTable players={players} />
     </main>
