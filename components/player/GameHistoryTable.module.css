@@ -1,0 +1,120 @@
+.wrapper {
+  margin-top: var(--space-md);
+  overflow-x: auto;
+}
+
+.table {
+  min-width: 600px;
+}
+
+.stripe {
+  background-color: var(--bg-table-stripe);
+}
+
+.center {
+  text-align: center;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-weight: var(--font-medium);
+  font-size: var(--text-sm);
+}
+
+.bold {
+  font-weight: var(--font-bold);
+}
+
+.small {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.positive {
+  color: var(--accent-green);
+}
+
+.negative {
+  color: var(--accent-red);
+}
+
+.footer {
+  margin-top: var(--space-sm);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 767px) {
+  .table {
+    min-width: 0;
+    border: none;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .table tbody tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto;
+    gap: 2px var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--border-default);
+    background: var(--bg-secondary);
+  }
+
+  .table tbody tr td {
+    border: none;
+    padding: 2px 0;
+  }
+
+  /* Date */
+  .table tbody tr td:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  /* Result + Elo change */
+  .table tbody tr td:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+  }
+
+  /* Team */
+  .table tbody tr td:nth-child(3) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    white-space: normal;
+    max-width: none;
+  }
+
+  /* Opponent */
+  .table tbody tr td:nth-child(4) {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    white-space: normal;
+    max-width: none;
+  }
+
+  /* Elo change */
+  .table tbody tr td:nth-child(5) {
+    display: none;
+  }
+
+  /* New Elo */
+  .table tbody tr td:nth-child(6) {
+    display: none;
+  }
+}
