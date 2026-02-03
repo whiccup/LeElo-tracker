@@ -1,8 +1,5 @@
 .errorBox {
   margin-top: var(--space-xl);
-  padding: var(--space-md);
-  border: 2px solid var(--accent-red);
-  background: var(--bg-secondary);
 }
 
 .errorBox h2 {
@@ -22,12 +19,12 @@
   font-weight: var(--font-medium);
   color: var(--accent-blue);
   background: none;
-  border: 1px solid var(--accent-blue);
-  padding: var(--space-sm) var(--space-md);
+  border: none;
+  padding: 0;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .retry:hover {
-  background: var(--accent-blue);
-  color: var(--bg-secondary);
+  text-decoration: underline;
 }

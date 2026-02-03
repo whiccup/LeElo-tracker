@@ -1,11 +1,10 @@
 .header {
   cursor: pointer;
   white-space: nowrap;
-  transition: color var(--transition-fast);
 }
 
 .header:hover {
-  color: var(--accent-blue);
+  color: #034694;
 }
 
 .header:hover .label {
@@ -13,7 +12,7 @@
 }
 
 .active {
-  color: var(--accent-blue);
+  color: #034694;
   font-weight: var(--font-bold);
 }
 

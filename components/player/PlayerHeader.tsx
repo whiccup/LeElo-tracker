@@ -13,7 +13,7 @@ export default function PlayerHeader({ player, rank }: Props) {
   return (
     <div className={styles.card}>
       <div className={styles.nameSection}>
-        <h1 className={styles.name}>{player.name.toUpperCase()}</h1>
+        <h1 className={styles.name}>{player.name}</h1>
         <p className={styles.subtitle}>
           Rank #{rank} &bull; {player.elo} Elo
         </p>

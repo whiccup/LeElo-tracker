@@ -7,7 +7,7 @@ export default function Header() {
       <div className={`content-wrapper ${styles.inner}`}>
         <div className={styles.brand}>
           <Link href="/" className={styles.title}>
-            LEELO TRACKER
+            LeElo Tracker
           </Link>
           <span className={styles.subtitle}>Basketball League Rankings</span>
         </div>

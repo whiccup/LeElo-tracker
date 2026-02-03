@@ -72,50 +72,40 @@ export default async function PlayerDetailPage({ params }: Props) {
       <div className="section-header">
         <h2>Career Stats</h2>
       </div>
-      <div className={styles.statsGrid}>
-        <div className={styles.statItem}>
-          <span className={styles.statLabel}>Wins</span>
-          <span className={styles.statValue}>{player.wins}</span>
-        </div>
-        <div className={styles.statItem}>
-          <span className={styles.statLabel}>Losses</span>
-          <span className={styles.statValue}>{player.losses}</span>
-        </div>
-        <div className={styles.statItem}>
-          <span className={styles.statLabel}>Win%</span>
-          <span className={styles.statValue}>
-            {player.winPercentage.toFixed(3).replace(/^0/, '')}
-          </span>
-        </div>
-        <div className={styles.statItem}>
-          <span className={styles.statLabel}>Games</span>
-          <span className={styles.statValue}>{player.gamesPlayed}</span>
-        </div>
-        <div className={styles.statItem}>
-          <span className={styles.statLabel}>Peak Elo</span>
-          <span className={styles.statValue}>{peakElo}</span>
-        </div>
-        <div className={styles.statItem}>
-          <span className={styles.statLabel}>Current</span>
-          <span className={styles.statValue}>{player.elo}</span>
-        </div>
-        <div className={styles.statItem}>
-          <span className={styles.statLabel}>Start</span>
-          <span className={styles.statValue}>1500</span>
-        </div>
-        <div className={styles.statItem}>
-          <span className={styles.statLabel}>Best Streak</span>
-          <span className={`${styles.statValue} ${styles.positive}`}>
-            W{bestStreak}
-          </span>
-        </div>
-        <div className={styles.statItem}>
-          <span className={styles.statLabel}>Worst Streak</span>
-          <span className={`${styles.statValue} ${styles.negative}`}>
-            L{worstStreak}
-          </span>
-        </div>
-      </div>
+      <table className={styles.statsTable}>
+        <tbody>
+          <tr>
+            <td className={styles.statsLabel}>Wins</td>
+            <td className={styles.statsValue}>{player.wins}</td>
+            <td className={styles.statsLabel}>Losses</td>
+            <td className={styles.statsValue}>{player.losses}</td>
+            <td className={styles.statsLabel}>Win%</td>
+            <td className={styles.statsValue}>
+              {player.winPercentage.toFixed(3).replace(/^0/, '')}
+            </td>
+          </tr>
+          <tr>
+            <td className={styles.statsLabel}>Games</td>
+            <td className={styles.statsValue}>{player.gamesPlayed}</td>
+            <td className={styles.statsLabel}>Peak Elo</td>
+            <td className={styles.statsValue}>{peakElo}</td>
+            <td className={styles.statsLabel}>Current</td>
+            <td className={styles.statsValue}>{player.elo}</td>
+          </tr>
+          <tr>
+            <td className={styles.statsLabel}>Start</td>
+            <td className={styles.statsValue}>1500</td>
+            <td className={styles.statsLabel}>Best Streak</td>
+            <td className={`${styles.statsValue} ${styles.positive}`}>
+              W{bestStreak}
+            </td>
+            <td className={styles.statsLabel}>Worst Streak</td>
+            <td className={`${styles.statsValue} ${styles.negative}`}>
+              L{worstStreak}
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
       <div className="section-header">
         <h2>Elo Rating Over Time</h2>

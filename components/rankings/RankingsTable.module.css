@@ -9,14 +9,10 @@
 
 .row {
   cursor: pointer;
-  transition: background-color var(--transition-fast),
-    box-shadow var(--transition-fast);
-  height: 44px;
 }
 
 .row:hover {
-  background-color: var(--bg-secondary);
-  box-shadow: 0 1px 4px var(--shadow-subtle);
+  background-color: var(--bg-row-hover);
 }
 
 .row:focus-visible {
@@ -29,7 +25,7 @@
 }
 
 .stripe:hover {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-row-hover);
 }
 
 .center {
@@ -37,8 +33,6 @@
 }
 
 .mono {
-  font-family: var(--font-mono);
-  font-weight: var(--font-medium);
   font-size: var(--text-sm);
 }
 
@@ -47,8 +41,6 @@
 }
 
 .name {
-  font-family: var(--font-serif);
-  font-weight: var(--font-semibold);
   font-size: var(--text-sm);
   white-space: nowrap;
 }
@@ -65,80 +57,4 @@
   margin-top: var(--space-sm);
   font-size: var(--text-xs);
   color: var(--text-secondary);
-}
-
-/* Mobile: card layout */
-@media (max-width: 767px) {
-  .table {
-    min-width: 0;
-    border: none;
-  }
-
-  .table thead {
-    display: none;
-  }
-
-  .table tbody {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-  }
-
-  .row {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto auto;
-    gap: 0 var(--space-sm);
-    padding: var(--space-sm) var(--space-md);
-    border: 1px solid var(--border-default);
-    background: var(--bg-secondary);
-    height: auto;
-  }
-
-  .row td {
-    border: none;
-    padding: 2px 0;
-  }
-
-  /* Rank */
-  .row td:nth-child(1) {
-    grid-row: 1 / 3;
-    display: flex;
-    align-items: center;
-    font-size: var(--text-lg);
-    color: var(--text-secondary);
-  }
-
-  /* Name */
-  .row td:nth-child(2) {
-    grid-column: 2;
-    grid-row: 1;
-    font-size: var(--text-base);
-  }
-
-  /* Elo */
-  .row td:nth-child(5) {
-    grid-column: 3;
-    grid-row: 1;
-    text-align: right;
-  }
-
-  /* W-L record + streak on second line */
-  .row td:nth-child(3),
-  .row td:nth-child(4),
-  .row td:nth-child(6) {
-    grid-row: 2;
-    font-size: var(--text-xs);
-  }
-
-  .row td:nth-child(3) {
-    grid-column: 2;
-  }
-
-  /* Hide GP, Win%, Last on mobile */
-  .row td:nth-child(7),
-  .row td:nth-child(8),
-  .row td:nth-child(9) {
-    display: none;
-  }
 }
