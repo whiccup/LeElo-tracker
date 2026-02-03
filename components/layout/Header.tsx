@@ -1,7 +1,23 @@
+'use client';
+
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './Header.module.css';
 
 export default function Header() {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
   return (
     <header className={styles.header}>
       <div className={styles.brand}>
@@ -13,6 +29,20 @@ export default function Header() {
       <nav className={styles.nav}>
         <Link href="/" className={styles.navLink}>Rankings</Link>
         <Link href="/" className={styles.navLink}>Reaping</Link>
+        <div className={styles.dropdownWrapper} ref={dropdownRef}>
+          <button
+            className={styles.dropdownToggle}
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+          >
+            Data Entry ▼
+          </button>
+          {dropdownOpen && (
+            <div className={styles.dropdown}>
+              <Link href="#" className={styles.dropdownLink}>New Player</Link>
+              <Link href="#" className={styles.dropdownLink}>Enter Game</Link>
+            </div>
+          )}
+        </div>
       </nav>
     </header>
   );

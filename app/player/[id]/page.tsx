@@ -7,11 +7,11 @@ import GameHistoryTable from '@/components/player/GameHistoryTable';
 import styles from './page.module.css';
 
 interface Props {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export async function generateMetadata({ params }: Props) {
-  const { id } = await params;
+  const { id } = params;
   const player = await getPlayerById(id);
   if (!player) {
     return { title: 'Player Not Found - LeElo Tracker' };
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props) {
 const editSpan = <span style={{ fontSize: '11px', fontWeight: 400, color: '#0645ad', marginLeft: '8px' }}>[edit]</span>;
 
 export default async function PlayerDetailPage({ params }: Props) {
-  const { id } = await params;
+  const { id } = params;
   const [player, games, allPlayers] = await Promise.all([
     getPlayerById(id),
     getPlayerGameHistory(id),

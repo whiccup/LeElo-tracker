@@ -27,6 +27,7 @@
 
 .nav {
   display: flex;
+  align-items: center;
   margin: 6px -8px 0;
   padding: 0;
   background: #555555;
@@ -51,4 +52,50 @@
 .navLink:hover {
   background: #333333;
   text-decoration: none !important;
+}
+
+.dropdownWrapper {
+  position: relative;
+  display: flex;
+}
+
+.dropdownToggle {
+  display: block;
+  padding: 4px 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dropdownToggle:hover {
+  background: #333333;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #555555;
+  border: 1px solid #444444;
+  z-index: 100;
+  min-width: 140px;
+}
+
+.dropdownLink {
+  display: block;
+  padding: 4px 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+.dropdownLink:hover {
+  background: #333333;
 }
