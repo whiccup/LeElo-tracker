@@ -53,7 +53,7 @@ export async function POST(request: Request) {
         phone: phone?.trim() || '',
         venmo_user: venmo_user?.trim() || '',
         player_notest: player_notes?.trim() || '',
-        elo: 1500,
+        elo: 1000,
         first_game: today,
         last_game: today,
         is_unlucky_twice: false,

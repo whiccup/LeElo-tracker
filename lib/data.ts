@@ -117,7 +117,7 @@ export async function getPlayerGameHistory(
   );
 
   const results: PlayerGameStats[] = [];
-  let prevElo = 1500;
+  let prevElo = 1000;
 
   for (const row of myRows) {
     const game = row.games as any;

@@ -96,7 +96,7 @@ export default async function PlayerDetailPage({ params }: Props) {
           </tr>
           <tr>
             <td className={styles.statsLabel}>Start</td>
-            <td className={styles.statsValue}>1500</td>
+            <td className={styles.statsValue}>1000</td>
             <td className={styles.statsLabel}>Best Streak</td>
             <td className={`${styles.statsValue} ${styles.positive}`}>
               W{bestStreak}

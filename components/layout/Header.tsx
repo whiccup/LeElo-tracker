@@ -39,7 +39,7 @@ export default function Header() {
           {dropdownOpen && (
             <div className={styles.dropdown}>
               <Link href="/player/new" className={styles.dropdownLink}>New Player</Link>
-              <Link href="#" className={styles.dropdownLink}>New Game</Link>
+              <Link href="/game/new" className={styles.dropdownLink}>New Game</Link>
             </div>
           )}
         </div>
