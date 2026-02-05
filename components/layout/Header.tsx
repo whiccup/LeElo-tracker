@@ -28,7 +28,7 @@ export default function Header() {
       </div>
       <nav className={styles.nav}>
         <Link href="/" className={styles.navLink}>Rankings</Link>
-        <Link href="/" className={styles.navLink}>Reaping</Link>
+        <Link href="/reaping" className={styles.navLink}>Reaping</Link>
         <div className={styles.dropdownWrapper} ref={dropdownRef}>
           <button
             className={styles.dropdownToggle}
@@ -38,8 +38,8 @@ export default function Header() {
           </button>
           {dropdownOpen && (
             <div className={styles.dropdown}>
-              <Link href="/player/new" className={styles.dropdownLink}>New Player</Link>
-              <Link href="/game/new" className={styles.dropdownLink}>New Game</Link>
+              <Link href="/player/new" className={styles.dropdownLink} onClick={() => setDropdownOpen(false)}>New Player</Link>
+              <Link href="/game/new" className={styles.dropdownLink} onClick={() => setDropdownOpen(false)}>New Game</Link>
             </div>
           )}
         </div>
