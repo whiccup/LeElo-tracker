@@ -63,3 +63,14 @@ export interface GameSortConfig {
   key: GameSortKey;
   direction: SortDirection;
 }
+
+export interface ReapingEvent {
+  id: string;
+  date: string;
+}
+
+export interface ReapingPlayer {
+  reapingId: string;
+  playerId: string;
+  excluded: boolean;
+}
