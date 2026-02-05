@@ -96,8 +96,12 @@ export default function NewGamePage() {
         return;
       }
 
-      router.push('/');
-      router.refresh();
+      // Clear form for next entry
+      setTeamA([]);
+      setTeamB([]);
+      setTeamAScore('');
+      setTeamBScore('');
+      setIsSubmitting(false);
     } catch {
       setError('An unexpected error occurred');
       setIsSubmitting(false);
