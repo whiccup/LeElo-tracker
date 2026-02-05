@@ -154,7 +154,7 @@ export default function NewGamePage() {
                     <select
                       className={styles.playerSelect}
                       multiple
-                      size={Math.min(availableForA.length, 6)}
+                      size={Math.max(Math.min(availableForA.length, 6), 2)}
                       onChange={handleTeamASelect}
                       value={[]}
                     >
@@ -190,7 +190,7 @@ export default function NewGamePage() {
                     <select
                       className={styles.playerSelect}
                       multiple
-                      size={Math.min(availableForB.length, 6)}
+                      size={Math.max(Math.min(availableForB.length, 6), 2)}
                       onChange={handleTeamBSelect}
                       value={[]}
                     >
