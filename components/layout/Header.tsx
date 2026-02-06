@@ -28,6 +28,7 @@ export default function Header() {
       </div>
       <nav className={styles.nav}>
         <Link href="/" className={styles.navLink}>Rankings</Link>
+        <Link href="/games" className={styles.navLink}>Games</Link>
         <Link href="/reaping" className={styles.navLink}>Reaping</Link>
         <div className={styles.dropdownWrapper} ref={dropdownRef}>
           <button

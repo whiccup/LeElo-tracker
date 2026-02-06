@@ -1,0 +1,72 @@
+.wrapper {
+  margin-top: var(--space-md);
+  overflow-x: auto;
+}
+
+.table {
+  min-width: 650px;
+}
+
+.stripe {
+  background-color: var(--bg-table-stripe);
+}
+
+.center {
+  text-align: center;
+}
+
+.mono {
+  font-size: var(--text-sm);
+}
+
+.bold {
+  font-weight: var(--font-bold);
+}
+
+.small {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.positive {
+  color: var(--accent-green);
+}
+
+.footer {
+  margin-top: var(--space-sm);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerControls {
+  display: flex;
+  gap: 8px;
+}
+
+.pageBtn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  padding: 0;
+  font-size: var(--text-xs);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.pageBtn:hover {
+  color: var(--text-primary);
+}
+
+.pageBtnActive {
+  color: var(--text-primary);
+  font-weight: var(--font-bold);
+  text-decoration: none;
+  cursor: default;
+}

@@ -64,6 +64,13 @@ export interface GameSortConfig {
   direction: SortDirection;
 }
 
+export type AllGamesSortKey = 'date' | 'teamA' | 'score' | 'teamB' | 'winner';
+
+export interface AllGamesSortConfig {
+  key: AllGamesSortKey;
+  direction: SortDirection;
+}
+
 export interface ReapingEvent {
   id: string;
   date: string;
