@@ -209,15 +209,13 @@ export default function ReapingPage() {
                             <span className={styles.autoEntry}>(auto-entry)</span>
                           )}
                         </span>
-                        {!isAutoIncluded(id) && (
-                          <button
-                            type="button"
-                            className={styles.removeButton}
-                            onClick={() => removeFromPool(id)}
-                          >
-                            [remove]
-                          </button>
-                        )}
+                        <button
+                          type="button"
+                          className={styles.removeButton}
+                          onClick={() => removeFromPool(id)}
+                        >
+                          [remove]
+                        </button>
                       </li>
                     ))}
                   </ul>

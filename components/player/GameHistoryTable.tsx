@@ -66,6 +66,7 @@ export default function GameHistoryTable({ games }: Props) {
               currentDirection={sortConfig.direction}
               onSort={handleSort}
             />
+            <th style={{ textAlign: 'center' }}>SCORE</th>
             <th style={{ textAlign: 'left' }}>TEAM</th>
             <th style={{ textAlign: 'left' }}>OPPONENT</th>
             <SortableHeader
@@ -97,6 +98,9 @@ export default function GameHistoryTable({ games }: Props) {
                 }`}
               >
                 {game.result}
+              </td>
+              <td className={`${styles.center} ${styles.mono}`}>
+                {game.teamScore} - {game.opponentScore}
               </td>
               <td className={styles.small}>
                 {game.teammates.join(', ')}
