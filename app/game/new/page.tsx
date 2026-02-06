@@ -64,6 +64,10 @@ export default function NewGamePage() {
       setError('Both teams must have at least one player');
       return;
     }
+    if (teamA.length > 5 || teamB.length > 5) {
+      setError('Each team can have a maximum of 5 players');
+      return;
+    }
     if (!teamAScore || !teamBScore) {
       setError('Scores are required for both teams');
       return;
@@ -154,7 +158,12 @@ export default function NewGamePage() {
                       ))}
                     </ul>
                   )}
-                  {availableForA.length > 0 && (
+                  {teamA.length >= 5 && (
+                    <div className={styles.maxPlayersNote}>
+                      Maximum of 5 players reached
+                    </div>
+                  )}
+                  {availableForA.length > 0 && teamA.length < 5 && (
                     <select
                       className={styles.playerSelect}
                       multiple
@@ -190,7 +199,12 @@ export default function NewGamePage() {
                       ))}
                     </ul>
                   )}
-                  {availableForB.length > 0 && (
+                  {teamB.length >= 5 && (
+                    <div className={styles.maxPlayersNote}>
+                      Maximum of 5 players reached
+                    </div>
+                  )}
+                  {availableForB.length > 0 && teamB.length < 5 && (
                     <select
                       className={styles.playerSelect}
                       multiple

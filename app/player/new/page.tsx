@@ -9,6 +9,7 @@ export default function NewPlayerPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const [formData, setFormData] = useState({
     first_name: '',
@@ -22,6 +23,7 @@ export default function NewPlayerPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
     setIsSubmitting(true);
 
     try {
@@ -41,9 +43,17 @@ export default function NewPlayerPage() {
         return;
       }
 
-      // Success - redirect to homepage
-      router.push('/');
-      router.refresh();
+      // Success - clear form and show success message
+      setFormData({
+        first_name: '',
+        last_name: '',
+        email: '',
+        phone: '',
+        venmo_user: '',
+        player_notes: '',
+      });
+      setSuccess('Player added successfully!');
+      setIsSubmitting(false);
     } catch (err) {
       setError('An unexpected error occurred');
       setIsSubmitting(false);
@@ -168,6 +178,7 @@ export default function NewPlayerPage() {
         </form>
 
         {error && <div className={styles.error}>{error}</div>}
+        {success && <div className={styles.success}>{success}</div>}
       </div>
     </main>
   );

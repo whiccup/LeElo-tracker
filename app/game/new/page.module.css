@@ -143,6 +143,13 @@
   font-style: italic;
 }
 
+.maxPlayersNote {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-style: italic;
+  margin-top: 4px;
+}
+
 .buttonRow {
   padding: 12px 8px;
 }

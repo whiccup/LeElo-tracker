@@ -244,24 +244,27 @@ export default function ReapingPage() {
             </tr>
             <tr>
               <td colSpan={2} className={styles.buttonRow}>
-                {pool.length > 15 && !result && (
+                {pool.length > 15 && (
                   <button
                     type="button"
                     className={styles.submitButton}
                     onClick={handleReap}
                   >
-                    Reap
+                    {result ? 'Re-Reap' : 'Reap'}
                   </button>
                 )}
                 {result && (
-                  <button
-                    type="button"
-                    className={styles.submitButton}
-                    onClick={handleSave}
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? 'Saving...' : 'Save Results'}
-                  </button>
+                  <>
+                    {' '}
+                    <button
+                      type="button"
+                      className={styles.submitButton}
+                      onClick={handleSave}
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Saving...' : 'Save Results'}
+                    </button>
+                  </>
                 )}
               </td>
             </tr>
