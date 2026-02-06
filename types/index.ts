@@ -71,6 +71,21 @@ export interface AllGamesSortConfig {
   direction: SortDirection;
 }
 
+export interface ComboStats {
+  playerIds: string[];
+  gamesPlayed: number;
+  wins: number;
+  losses: number;
+  winPercentage: number;
+}
+
+export type ComboSortKey = 'players' | 'gamesPlayed' | 'wins' | 'losses' | 'winPercentage';
+
+export interface ComboSortConfig {
+  key: ComboSortKey;
+  direction: SortDirection;
+}
+
 export interface ReapingEvent {
   id: string;
   date: string;
