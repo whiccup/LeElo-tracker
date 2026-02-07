@@ -1,11 +1,7 @@
 import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { supabase } from '@/lib/supabase';
-
-const DEFAULT_RATING = 1000;
-const K_BASE = 20;
-const K_PLACEMENT = 40;
-const PLACEMENT_THRESHOLD = 5; // first 5 games use higher K
+import { DEFAULT_RATING, K_BASE, K_PLACEMENT, PLACEMENT_THRESHOLD, recalculateAllElo } from '@/lib/elo';
 
 export async function POST(request: Request) {
   try {
@@ -162,6 +158,124 @@ export async function POST(request: Request) {
 
     revalidatePath('/');
     return NextResponse.json({ success: true, gameId }, { status: 201 });
+  } catch (error) {
+    console.error('API error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(request: Request) {
+  try {
+    const body = await request.json();
+    const { gameId, date, teamAPlayers, teamBPlayers, teamAScore, teamBScore } = body;
+
+    // Validate required fields
+    if (!gameId) {
+      return NextResponse.json({ error: 'Game ID is required' }, { status: 400 });
+    }
+    if (!date) {
+      return NextResponse.json({ error: 'Date is required' }, { status: 400 });
+    }
+    if (!teamAPlayers?.length || !teamBPlayers?.length) {
+      return NextResponse.json(
+        { error: 'Both teams must have at least one player' },
+        { status: 400 }
+      );
+    }
+    if (teamAScore == null || teamBScore == null) {
+      return NextResponse.json(
+        { error: 'Scores are required for both teams' },
+        { status: 400 }
+      );
+    }
+    if (Number(teamAScore) === Number(teamBScore)) {
+      return NextResponse.json(
+        { error: 'Game cannot end in a tie' },
+        { status: 400 }
+      );
+    }
+
+    const overlap = teamAPlayers.filter((p: string) => teamBPlayers.includes(p));
+    if (overlap.length > 0) {
+      return NextResponse.json(
+        { error: 'A player cannot be on both teams' },
+        { status: 400 }
+      );
+    }
+
+    // Verify game exists
+    const { data: existingGame } = await supabase
+      .from('games')
+      .select('id')
+      .eq('id', gameId)
+      .single();
+
+    if (!existingGame) {
+      return NextResponse.json({ error: 'Game not found' }, { status: 404 });
+    }
+
+    const winner = Number(teamAScore) > Number(teamBScore) ? 'A' : 'B';
+
+    // Update the games row
+    const { error: gameErr } = await supabase
+      .from('games')
+      .update({
+        date,
+        team_a_score: Number(teamAScore),
+        team_b_score: Number(teamBScore),
+        winner,
+      })
+      .eq('id', gameId);
+
+    if (gameErr) {
+      console.error('Game update error:', gameErr);
+      return NextResponse.json({ error: 'Failed to update game' }, { status: 500 });
+    }
+
+    // Delete existing game_players rows for this game
+    const { error: deleteErr } = await supabase
+      .from('game_players')
+      .delete()
+      .eq('game_id', gameId);
+
+    if (deleteErr) {
+      console.error('game_players delete error:', deleteErr);
+      return NextResponse.json({ error: 'Failed to update player participation' }, { status: 500 });
+    }
+
+    // Insert new game_players rows with placeholder elo_after
+    const gamePlayerRows = [
+      ...teamAPlayers.map((id: string) => ({
+        game_id: gameId,
+        player_id: id,
+        team: 'A',
+        elo_after: 0,
+      })),
+      ...teamBPlayers.map((id: string) => ({
+        game_id: gameId,
+        player_id: id,
+        team: 'B',
+        elo_after: 0,
+      })),
+    ];
+
+    const { error: gpErr } = await supabase
+      .from('game_players')
+      .insert(gamePlayerRows);
+
+    if (gpErr) {
+      console.error('game_players insert error:', gpErr);
+      return NextResponse.json({ error: 'Failed to record player participation' }, { status: 500 });
+    }
+
+    // Recalculate all Elo from scratch
+    await recalculateAllElo();
+
+    revalidatePath('/');
+    return NextResponse.json({ success: true, gameId });
   } catch (error) {
     console.error('API error:', error);
     return NextResponse.json(

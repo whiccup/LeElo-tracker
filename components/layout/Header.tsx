@@ -27,9 +27,10 @@ export default function Header() {
         <span className={styles.subtitle}>From LeElo, the free basketball statistics database</span>
       </div>
       <nav className={styles.nav}>
-        <Link href="/" className={styles.navLink}>Rankings</Link>
+        <Link href="/" className={styles.navLink}>Player Rankings</Link>
         <Link href="/games" className={styles.navLink}>Games</Link>
-        <Link href="/combos" className={styles.navLink}>Combos</Link>
+        <Link href="/combos" className={styles.navLink}>Chemistry</Link>
+        <Link href="/rankings_info" className={styles.navLink}>Ranks and Badges</Link>
         <Link href="/reaping" className={styles.navLink}>Reaping</Link>
         <div className={styles.dropdownWrapper} ref={dropdownRef}>
           <button
@@ -42,6 +43,7 @@ export default function Header() {
             <div className={styles.dropdown}>
               <Link href="/player/new" className={styles.dropdownLink} onClick={() => setDropdownOpen(false)}>New Player</Link>
               <Link href="/game/new" className={styles.dropdownLink} onClick={() => setDropdownOpen(false)}>New Game</Link>
+              <Link href="/game/edit" className={styles.dropdownLink} onClick={() => setDropdownOpen(false)}>Edit Game</Link>
             </div>
           )}
         </div>
