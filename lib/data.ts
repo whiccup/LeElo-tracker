@@ -11,13 +11,16 @@ export async function getPlayers(): Promise<Player[]> {
   // Get all game_players joined with games for computing derived stats
   const { data: gameData } = await supabase
     .from('game_players')
-    .select('player_id, team, elo_after, game_id, games!inner(id, date, winner)');
+    .select('player_id, team, elo_after, game_id, games!inner(id, date, winner, created_at)');
 
-  // Sort gameData by game date ascending
+  // Sort gameData by game date and created_at ascending
   const sortedGameData = (gameData || []).sort((a, b) => {
-    const dateA = (a.games as any).date;
-    const dateB = (b.games as any).date;
-    return dateA.localeCompare(dateB);
+    const gameA = a.games as any;
+    const gameB = b.games as any;
+    const dateCompare = gameA.date.localeCompare(gameB.date);
+    if (dateCompare !== 0) return dateCompare;
+    // If same date, sort by created_at timestamp
+    return new Date(gameA.created_at).getTime() - new Date(gameB.created_at).getTime();
   });
 
   // Group by player
@@ -85,17 +88,20 @@ export async function getPlayerGameHistory(
   // Get all games this player was in
   const { data: playerGameRows } = await supabase
     .from('game_players')
-    .select('game_id, player_id, team, elo_after, games!inner(id, date, team_a_score, team_b_score, winner)');
+    .select('game_id, player_id, team, elo_after, games!inner(id, date, team_a_score, team_b_score, winner, created_at)');
 
   if (!playerGameRows) return [];
 
-  // Filter to this player's rows and sort by date ascending
+  // Filter to this player's rows and sort by date and created_at ascending
   const myRows = playerGameRows
     .filter((r) => r.player_id === playerId)
     .sort((a, b) => {
-      const dateA = (a.games as any).date;
-      const dateB = (b.games as any).date;
-      return dateA.localeCompare(dateB);
+      const gameA = a.games as any;
+      const gameB = b.games as any;
+      const dateCompare = gameA.date.localeCompare(gameB.date);
+      if (dateCompare !== 0) return dateCompare;
+      // If same date, sort by created_at timestamp
+      return new Date(gameA.created_at).getTime() - new Date(gameB.created_at).getTime();
     });
 
   if (myRows.length === 0) return [];
@@ -154,8 +160,9 @@ export async function getPlayerGameHistory(
 export async function getAllGames(): Promise<Game[]> {
   const { data: games } = await supabase
     .from('games')
-    .select('id, date, team_a_score, team_b_score, winner')
-    .order('date', { ascending: false });
+    .select('id, date, team_a_score, team_b_score, winner, created_at')
+    .order('date', { ascending: false })
+    .order('created_at', { ascending: false });
 
   if (!games) return [];
 
@@ -175,5 +182,6 @@ export async function getAllGames(): Promise<Game[]> {
     teamAScore: g.team_a_score,
     teamBScore: g.team_b_score,
     winner: g.winner as 'A' | 'B',
+    created_at: g.created_at,
   }));
 }

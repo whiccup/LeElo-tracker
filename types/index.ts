@@ -25,6 +25,7 @@ export interface Game {
   teamAScore: number;
   teamBScore: number;
   winner: 'A' | 'B';
+  created_at: string;
 }
 
 export interface PlayerGameStats {

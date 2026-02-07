@@ -52,6 +52,7 @@ npm run lint
 - `date` (date)
 - `team_a_score`, `team_b_score` (integer)
 - `winner` ('A' or 'B')
+- `created_at` (timestamp, default NOW()) - tracks game entry order
 
 **game_players table (junction):**
 - `game_id` (FK to games)
