@@ -5,13 +5,14 @@
 
 .tabs {
   display: flex;
-  gap: 8px;
+  gap: var(--space-sm);
   margin-bottom: var(--space-md);
 }
 
 .tab {
   background: none;
   border: none;
+  font-family: var(--font-sans);
   color: var(--text-secondary);
   padding: 4px 0;
   font-size: var(--text-sm);
@@ -32,6 +33,11 @@
 
 .table {
   min-width: 500px;
+  table-layout: fixed;
+}
+
+.table tbody tr:hover {
+  background-color: var(--bg-row-hover);
 }
 
 .stripe {
@@ -43,6 +49,7 @@
 }
 
 .mono {
+  font-family: var(--font-mono);
   font-size: var(--text-sm);
 }
 
@@ -56,6 +63,19 @@
 
 .footer {
   margin-top: var(--space-sm);
+  font-family: var(--font-sans);
   font-size: var(--text-xs);
   color: var(--text-secondary);
+}
+
+@media (max-width: 767px) {
+  .table {
+    min-width: 0;
+    table-layout: auto;
+  }
+
+  .table th:nth-child(6),
+  .table td:nth-child(6) {
+    display: none;
+  }
 }

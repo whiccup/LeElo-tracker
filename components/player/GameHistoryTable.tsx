@@ -66,9 +66,9 @@ export default function GameHistoryTable({ games }: Props) {
               currentDirection={sortConfig.direction}
               onSort={handleSort}
             />
-            <th style={{ textAlign: 'center' }}>SCORE</th>
-            <th style={{ textAlign: 'left' }}>TEAM</th>
-            <th style={{ textAlign: 'left' }}>OPPONENT</th>
+            <th scope="col" style={{ textAlign: 'center' }}>SCORE</th>
+            <th scope="col" style={{ textAlign: 'left' }}>TEAM</th>
+            <th scope="col" style={{ textAlign: 'left' }}>OPPONENT</th>
             <SortableHeader
               label="Elo &Delta;"
               sortKey="eloChange"

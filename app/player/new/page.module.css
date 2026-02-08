@@ -2,6 +2,7 @@
   display: inline-block;
   margin-top: var(--space-md);
   font-size: var(--text-sm);
+  font-family: var(--font-sans);
   color: var(--accent-blue);
 }
 
@@ -16,10 +17,10 @@
 
 .formTable {
   width: 100%;
-  max-width: 600px;
+  max-width: 680px;
   border-collapse: collapse;
   border: 1px solid var(--border-default);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
 }
 
@@ -32,7 +33,7 @@
   background: var(--bg-table-header);
   font-weight: var(--font-bold);
   color: var(--text-secondary);
-  width: 140px;
+  width: 160px;
   vertical-align: top;
   padding-top: 8px;
 }
@@ -43,10 +44,10 @@
 
 .input {
   width: 100%;
-  padding: 4px 6px;
+  padding: 6px 8px;
   border: 1px solid var(--border-default);
   border-radius: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   background: var(--bg-secondary);
   color: var(--text-primary);
@@ -59,10 +60,10 @@
 
 .textarea {
   width: 100%;
-  padding: 4px 6px;
+  padding: 6px 8px;
   border: 1px solid var(--border-default);
   border-radius: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   background: var(--bg-secondary);
   color: var(--text-primary);
@@ -89,7 +90,7 @@
   background: var(--bg-table-header);
   border: 1px solid var(--border-default);
   border-radius: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   font-weight: var(--font-bold);
   color: var(--text-primary);
@@ -97,11 +98,11 @@
 }
 
 .submitButton:hover {
-  background: #d4d4d4;
+  background: #e0dbd1;
 }
 
 .submitButton:active {
-  background: #c4c4c4;
+  background: #d6d0c4;
 }
 
 .submitButton:disabled {
@@ -116,7 +117,7 @@
   border: 1px solid var(--accent-red);
   color: var(--accent-red);
   font-size: var(--text-sm);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   max-width: 600px;
 }
 
@@ -127,7 +128,7 @@
   border: 1px solid var(--accent-green);
   color: var(--accent-green);
   font-size: var(--text-sm);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   max-width: 600px;
 }
 
@@ -135,5 +136,44 @@
   display: block;
   font-size: var(--text-xs);
   color: var(--text-tertiary);
-  margin-top: 2px;
+  margin-top: 4px;
+}
+
+@media (max-width: 767px) {
+  .formTable {
+    max-width: 100%;
+  }
+
+  .formTable,
+  .formTable tbody,
+  .formTable tr,
+  .formTable td {
+    display: block;
+    width: 100%;
+  }
+
+  .formTable tr {
+    border-top: 1px solid var(--border-default);
+  }
+
+  .formTable tr:first-child {
+    border-top: none;
+  }
+
+  .formTable td {
+    border: none;
+  }
+
+  .labelCell {
+    width: 100%;
+    padding-bottom: 4px;
+  }
+
+  .inputCell {
+    padding-top: 0;
+  }
+
+  .buttonRow {
+    padding-top: 10px;
+  }
 }

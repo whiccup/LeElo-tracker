@@ -1,16 +1,19 @@
 .container {
   margin-top: var(--space-md);
+  max-width: 920px;
 }
 
 .svg {
   width: 100%;
   height: auto;
-  max-height: 250px;
+  max-height: 270px;
   border: 1px solid var(--border-default);
+  background: #fffdfa;
 }
 
 .placeholder {
   padding: 8px;
+  font-family: var(--font-sans);
   color: var(--text-secondary);
   font-size: var(--text-sm);
   margin-top: var(--space-md);

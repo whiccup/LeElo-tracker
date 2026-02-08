@@ -164,19 +164,22 @@ export default function NewGamePage() {
                     </div>
                   )}
                   {availableForA.length > 0 && teamA.length < 5 && (
-                    <select
-                      className={styles.playerSelect}
-                      multiple
-                      size={Math.max(Math.min(availableForA.length, 6), 2)}
-                      onChange={handleTeamASelect}
-                      value={[]}
-                    >
-                      {availableForA.map((p) => (
-                        <option key={p.id} value={p.id}>
-                          {p.name}
-                        </option>
-                      ))}
-                    </select>
+                    <>
+                      <select
+                        className={styles.playerSelect}
+                        multiple
+                        size={Math.max(Math.min(availableForA.length, 6), 2)}
+                        onChange={handleTeamASelect}
+                        value={[]}
+                      >
+                        {availableForA.map((p) => (
+                          <option key={p.id} value={p.id}>
+                            {p.name}
+                          </option>
+                        ))}
+                      </select>
+                      <div className={styles.emptyNote}>Use Cmd/Ctrl-click for multiple players.</div>
+                    </>
                   )}
                 </td>
               </tr>
@@ -205,19 +208,22 @@ export default function NewGamePage() {
                     </div>
                   )}
                   {availableForB.length > 0 && teamB.length < 5 && (
-                    <select
-                      className={styles.playerSelect}
-                      multiple
-                      size={Math.max(Math.min(availableForB.length, 6), 2)}
-                      onChange={handleTeamBSelect}
-                      value={[]}
-                    >
-                      {availableForB.map((p) => (
-                        <option key={p.id} value={p.id}>
-                          {p.name}
-                        </option>
-                      ))}
-                    </select>
+                    <>
+                      <select
+                        className={styles.playerSelect}
+                        multiple
+                        size={Math.max(Math.min(availableForB.length, 6), 2)}
+                        onChange={handleTeamBSelect}
+                        value={[]}
+                      >
+                        {availableForB.map((p) => (
+                          <option key={p.id} value={p.id}>
+                            {p.name}
+                          </option>
+                        ))}
+                      </select>
+                      <div className={styles.emptyNote}>Use Cmd/Ctrl-click for multiple players.</div>
+                    </>
                   )}
                 </td>
               </tr>

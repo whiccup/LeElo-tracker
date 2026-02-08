@@ -221,19 +221,22 @@ export default function ReapingPage() {
                   </ul>
                 )}
                 {available.length > 0 && (
-                  <select
-                    className={styles.playerSelect}
-                    multiple
-                    size={Math.max(Math.min(available.length, 6), 2)}
-                    onChange={handlePlayerSelect}
-                    value={[]}
-                  >
-                    {available.map((p) => (
-                      <option key={p.id} value={p.id}>
-                        {p.name}
-                      </option>
-                    ))}
-                  </select>
+                  <>
+                    <select
+                      className={styles.playerSelect}
+                      multiple
+                      size={Math.max(Math.min(available.length, 6), 2)}
+                      onChange={handlePlayerSelect}
+                      value={[]}
+                    >
+                      {available.map((p) => (
+                        <option key={p.id} value={p.id}>
+                          {p.name}
+                        </option>
+                      ))}
+                    </select>
+                    <div className={styles.helpText}>Use Cmd/Ctrl-click for multiple players.</div>
+                  </>
                 )}
                 <div className={styles.playerCount}>
                   {pool.length} player{pool.length !== 1 ? 's' : ''} signed up

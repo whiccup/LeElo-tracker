@@ -291,19 +291,22 @@ export default function EditGamePage() {
                         </div>
                       )}
                       {availableForA.length > 0 && teamA.length < 5 && (
-                        <select
-                          className={styles.playerSelect}
-                          multiple
-                          size={Math.max(Math.min(availableForA.length, 6), 2)}
-                          onChange={handleTeamASelect}
-                          value={[]}
-                        >
-                          {availableForA.map((p) => (
-                            <option key={p.id} value={p.id}>
-                              {p.name}
-                            </option>
-                          ))}
-                        </select>
+                        <>
+                          <select
+                            className={styles.playerSelect}
+                            multiple
+                            size={Math.max(Math.min(availableForA.length, 6), 2)}
+                            onChange={handleTeamASelect}
+                            value={[]}
+                          >
+                            {availableForA.map((p) => (
+                              <option key={p.id} value={p.id}>
+                                {p.name}
+                              </option>
+                            ))}
+                          </select>
+                          <div className={styles.emptyNote}>Use Cmd/Ctrl-click for multiple players.</div>
+                        </>
                       )}
                     </td>
                   </tr>
@@ -332,19 +335,22 @@ export default function EditGamePage() {
                         </div>
                       )}
                       {availableForB.length > 0 && teamB.length < 5 && (
-                        <select
-                          className={styles.playerSelect}
-                          multiple
-                          size={Math.max(Math.min(availableForB.length, 6), 2)}
-                          onChange={handleTeamBSelect}
-                          value={[]}
-                        >
-                          {availableForB.map((p) => (
-                            <option key={p.id} value={p.id}>
-                              {p.name}
-                            </option>
-                          ))}
-                        </select>
+                        <>
+                          <select
+                            className={styles.playerSelect}
+                            multiple
+                            size={Math.max(Math.min(availableForB.length, 6), 2)}
+                            onChange={handleTeamBSelect}
+                            value={[]}
+                          >
+                            {availableForB.map((p) => (
+                              <option key={p.id} value={p.id}>
+                                {p.name}
+                              </option>
+                            ))}
+                          </select>
+                          <div className={styles.emptyNote}>Use Cmd/Ctrl-click for multiple players.</div>
+                        </>
                       )}
                     </td>
                   </tr>
@@ -392,11 +398,7 @@ export default function EditGamePage() {
         </form>
 
         {error && <div className={styles.error}>{error}</div>}
-        {success && (
-          <div className={styles.error} style={{ background: '#efe', borderColor: 'var(--accent-green)', color: 'var(--accent-green)' }}>
-            {success}
-          </div>
-        )}
+        {success && <div className={styles.success}>{success}</div>}
       </div>
     </main>
   );

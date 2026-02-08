@@ -25,8 +25,7 @@ export default function SortableHeader({
     <th
       className={`${styles.header} ${isActive ? styles.active : ''}`}
       style={{ textAlign: align }}
-      onClick={() => onSort(sortKey)}
-      role="columnheader"
+      scope="col"
       aria-sort={
         isActive
           ? currentDirection === 'asc'
@@ -34,22 +33,22 @@ export default function SortableHeader({
             : 'descending'
           : 'none'
       }
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onSort(sortKey);
-        }
-      }}
     >
-      <span className={styles.label}>
-        {label}
-        {isActive && (
-          <span className={styles.arrow}>
-            {currentDirection === 'asc' ? ' \u25B4' : ' \u25BE'}
-          </span>
-        )}
-      </span>
+      <button
+        type="button"
+        className={styles.sortButton}
+        onClick={() => onSort(sortKey)}
+        aria-label={`Sort by ${label}`}
+      >
+        <span className={styles.label}>
+          {label}
+          {isActive && (
+            <span className={styles.arrow}>
+              {currentDirection === 'asc' ? ' \u25B4' : ' \u25BE'}
+            </span>
+          )}
+        </span>
+      </button>
     </th>
   );
 }

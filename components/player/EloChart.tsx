@@ -68,7 +68,7 @@ export default function EloChart({ eloHistory }: Props) {
             y1={tick.y}
             x2={width - padding.right}
             y2={tick.y}
-            stroke="#c0c0c0"
+            stroke="#d5d0c6"
           />
         ))}
 
@@ -81,7 +81,7 @@ export default function EloChart({ eloHistory }: Props) {
             textAnchor="end"
             fontSize="12"
             fill="#54595d"
-            fontFamily="'Times New Roman', serif"
+            fontFamily="var(--font-sans)"
           >
             {tick.elo}
           </text>
@@ -96,7 +96,7 @@ export default function EloChart({ eloHistory }: Props) {
             textAnchor="middle"
             fontSize="11"
             fill="#54595d"
-            fontFamily="'Times New Roman', serif"
+            fontFamily="var(--font-sans)"
           >
             {label.label}
           </text>
@@ -106,8 +106,8 @@ export default function EloChart({ eloHistory }: Props) {
         <polyline
           points={points}
           fill="none"
-          stroke="#000000"
-          strokeWidth="1.5"
+          stroke="#1e5a9e"
+          strokeWidth="2"
         />
       </svg>
     </div>

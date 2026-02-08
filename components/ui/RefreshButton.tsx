@@ -9,20 +9,10 @@ export default function RefreshButton() {
 
   return (
     <button
+      className="meta-button"
       onClick={() => startTransition(() => router.refresh())}
       disabled={isPending}
-      style={{
-        background: 'none',
-        border: 'none',
-        color: 'var(--accent-blue)',
-        cursor: isPending ? 'default' : 'pointer',
-        fontSize: 'var(--text-xs)',
-        fontFamily: 'Arial, Helvetica, sans-serif',
-        textDecoration: 'underline',
-        padding: 0,
-        marginLeft: '6px',
-        opacity: isPending ? 0.5 : 1,
-      }}
+      style={{ opacity: isPending ? 0.5 : 1, cursor: isPending ? 'default' : 'pointer' }}
     >
       {isPending ? '[refreshing...]' : '[refresh]'}
     </button>
