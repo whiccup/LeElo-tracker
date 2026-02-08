@@ -225,7 +225,7 @@ export default function ReapingPage() {
                     <select
                       className={styles.playerSelect}
                       multiple
-                      size={Math.max(Math.min(available.length, 6), 2)}
+                      size={Math.max(Math.min(available.length, 9), 2)}
                       onChange={handlePlayerSelect}
                       value={[]}
                     >

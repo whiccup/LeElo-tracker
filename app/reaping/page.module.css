@@ -99,6 +99,7 @@
 }
 
 .playerSelect option {
+  font-size: var(--text-sm);
   padding: 3px 6px;
 }
 
