@@ -1,0 +1,95 @@
+.formContainer {
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-2xl);
+}
+
+.heading {
+  font-family: var(--font-sans);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.formTable {
+  width: 100%;
+  max-width: 400px;
+  border-collapse: collapse;
+  border: 1px solid var(--border-default);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--text-sm);
+}
+
+.formTable td {
+  padding: 6px 8px;
+  border: 1px solid var(--border-default);
+}
+
+.labelCell {
+  background: var(--bg-table-header);
+  font-weight: var(--font-bold);
+  color: var(--text-secondary);
+  width: 100px;
+  vertical-align: top;
+  padding-top: 8px;
+}
+
+.inputCell {
+  background: var(--bg-secondary);
+}
+
+.input {
+  width: 100%;
+  padding: 4px 6px;
+  border: 1px solid var(--border-default);
+  border-radius: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--text-sm);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.input:focus {
+  outline: 1px solid var(--accent-blue);
+  outline-offset: 0;
+}
+
+.buttonRow {
+  padding: 12px 8px;
+}
+
+.submitButton {
+  padding: 6px 16px;
+  background: var(--bg-table-header);
+  border: 1px solid var(--border-default);
+  border-radius: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background: #d4d4d4;
+}
+
+.submitButton:active {
+  background: #c4c4c4;
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error {
+  margin-top: var(--space-lg);
+  padding: 8px 12px;
+  background: #fee;
+  border: 1px solid var(--accent-red);
+  color: var(--accent-red);
+  font-size: var(--text-sm);
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 400px;
+}
