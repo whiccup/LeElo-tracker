@@ -70,7 +70,7 @@ export default function CombosTable({ games, nameMap }: Props) {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.center}>#</th>
+            <th scope="col" className={styles.center}>#</th>
             <SortableHeader
               label="Players"
               sortKey="players"

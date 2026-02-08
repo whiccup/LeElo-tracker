@@ -24,7 +24,7 @@ export default async function CombosPage() {
   return (
     <main>
       <div className="section-header">
-        <h2>Combo Synergies</h2>
+        <h2>Synergies</h2>
         <span className="section-meta">Last Updated: {today} <RefreshButton /></span>
       </div>
       <CombosTable games={games} nameMap={nameMap} />

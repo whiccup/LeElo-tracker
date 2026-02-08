@@ -2,6 +2,7 @@
   display: inline-block;
   margin-top: var(--space-md);
   font-size: var(--text-sm);
+  font-family: var(--font-sans);
   color: var(--accent-blue);
 }
 
@@ -16,10 +17,10 @@
 
 .formTable {
   width: 100%;
-  max-width: 600px;
+  max-width: 760px;
   border-collapse: collapse;
   border: 1px solid var(--border-default);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
 }
 
@@ -32,7 +33,7 @@
   background: var(--bg-table-header);
   font-weight: var(--font-bold);
   color: var(--text-secondary);
-  width: 140px;
+  width: 160px;
   vertical-align: top;
   padding-top: 8px;
 }
@@ -43,10 +44,10 @@
 
 .input {
   width: 100%;
-  padding: 4px 6px;
+  padding: 6px 8px;
   border: 1px solid var(--border-default);
   border-radius: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   background: var(--bg-secondary);
   color: var(--text-primary);
@@ -59,10 +60,10 @@
 
 .scoreInput {
   width: 60px;
-  padding: 4px 6px;
+  padding: 6px 8px;
   border: 1px solid var(--border-default);
   border-radius: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   background: var(--bg-secondary);
   color: var(--text-primary);
@@ -104,7 +105,7 @@
   color: var(--accent-red);
   cursor: pointer;
   font-size: var(--text-xs);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   padding: 0 4px;
 }
 
@@ -117,7 +118,7 @@
   padding: 0;
   border: 1px solid var(--border-default);
   border-radius: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   background: var(--bg-secondary);
   color: var(--text-primary);
@@ -125,6 +126,7 @@
 }
 
 .playerSelect option {
+  font-size: var(--text-sm);
   padding: 3px 6px;
 }
 
@@ -159,7 +161,7 @@
   background: var(--bg-table-header);
   border: 1px solid var(--border-default);
   border-radius: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
   font-weight: var(--font-bold);
   color: var(--text-primary);
@@ -167,11 +169,11 @@
 }
 
 .submitButton:hover {
-  background: #d4d4d4;
+  background: #e0dbd1;
 }
 
 .submitButton:active {
-  background: #c4c4c4;
+  background: #d6d0c4;
 }
 
 .submitButton:disabled {
@@ -186,7 +188,18 @@
   border: 1px solid var(--accent-red);
   color: var(--accent-red);
   font-size: var(--text-sm);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  max-width: 600px;
+}
+
+.success {
+  margin-top: var(--space-lg);
+  padding: 8px 12px;
+  background: #efe;
+  border: 1px solid var(--accent-green);
+  color: var(--accent-green);
+  font-size: var(--text-sm);
+  font-family: var(--font-sans);
   max-width: 600px;
 }
 
@@ -199,6 +212,8 @@
 .scoreRow {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
 }
 
 .scoreLabel {
@@ -206,4 +221,43 @@
   color: var(--text-secondary);
   width: 55px;
   font-weight: var(--font-bold);
+}
+
+@media (max-width: 767px) {
+  .formTable {
+    max-width: 100%;
+  }
+
+  .formTable,
+  .formTable tbody,
+  .formTable tr,
+  .formTable td {
+    display: block;
+    width: 100%;
+  }
+
+  .formTable tr {
+    border-top: 1px solid var(--border-default);
+  }
+
+  .formTable tr:first-child {
+    border-top: none;
+  }
+
+  .formTable td {
+    border: none;
+  }
+
+  .labelCell {
+    width: 100%;
+    padding-bottom: 4px;
+  }
+
+  .inputCell {
+    padding-top: 0;
+  }
+
+  .buttonRow {
+    padding-top: 10px;
+  }
 }

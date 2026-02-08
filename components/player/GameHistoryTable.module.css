@@ -5,6 +5,11 @@
 
 .table {
   min-width: 600px;
+  table-layout: fixed;
+}
+
+.table tbody tr:hover {
+  background-color: var(--bg-row-hover);
 }
 
 .stripe {
@@ -16,6 +21,7 @@
 }
 
 .mono {
+  font-family: var(--font-mono);
   font-size: var(--text-sm);
 }
 
@@ -26,7 +32,8 @@
 .small {
   font-size: var(--text-xs);
   color: var(--text-secondary);
-  max-width: 200px;
+  font-family: var(--font-sans);
+  max-width: 230px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -42,6 +49,23 @@
 
 .footer {
   margin-top: var(--space-sm);
+  font-family: var(--font-sans);
   font-size: var(--text-xs);
   color: var(--text-secondary);
+}
+
+@media (max-width: 767px) {
+  .table {
+    min-width: 0;
+    table-layout: auto;
+  }
+
+  .table th:nth-child(3),
+  .table td:nth-child(3),
+  .table th:nth-child(4),
+  .table td:nth-child(4),
+  .table th:nth-child(5),
+  .table td:nth-child(5) {
+    display: none;
+  }
 }
