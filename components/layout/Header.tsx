@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '@/components/auth/AuthProvider';
 import styles from './Header.module.css';
 
@@ -11,6 +11,12 @@ export default function Header() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { isAuthenticated, isLoading, logout } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
+
+  const navClass = (href: string) => {
+    const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
+    return isActive ? `${styles.navLink} ${styles.navLinkActive}` : styles.navLink;
+  };
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -46,13 +52,13 @@ export default function Header() {
         )}
       </div>
       <nav className={styles.nav}>
-        <Link href="/" className={styles.navLink}>Player Rankings</Link>
-        <Link href="/games" className={styles.navLink}>Games</Link>
-        <Link href="/combos" className={styles.navLink}>Chemistry</Link>
-        <Link href="/rankings_info" className={styles.navLink}>Ranks and Badges</Link>
+        <Link href="/" className={navClass('/')}>Player Rankings</Link>
+        <Link href="/games" className={navClass('/games')}>Games</Link>
+        <Link href="/combos" className={navClass('/combos')}>Chemistry</Link>
+        <Link href="/rankings_info" className={navClass('/rankings_info')}>Ranks and Badges</Link>
         {!isLoading && isAuthenticated && (
           <>
-            <Link href="/reaping" className={styles.navLink}>Reaping</Link>
+            <Link href="/reaping" className={navClass('/reaping')}>Reaping</Link>
             <div className={styles.dropdownWrapper} ref={dropdownRef}>
               <button
                 className={styles.dropdownToggle}

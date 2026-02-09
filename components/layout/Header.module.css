@@ -72,6 +72,20 @@
   text-decoration: none !important;
 }
 
+.navLinkActive {
+  background: var(--bg-brand);
+  color: #fff !important;
+}
+
+.navLinkActive:visited {
+  color: #fff !important;
+}
+
+.navLinkActive:hover {
+  background: var(--bg-brand);
+  color: #fff !important;
+}
+
 .dropdownWrapper {
   position: relative;
   display: flex;
