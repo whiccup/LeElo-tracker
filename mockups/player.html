@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marcus Thompson - LeElo Tracker (Mockup)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, 'Times New Roman', serif; font-size: 14px; line-height: 1.5; color: #202122; background: #eee; }
+  a { color: #0645ad; text-decoration: underline; }
+  a:visited { color: #0b0080; }
+
+  .content-wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    background: #fff;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    min-height: 100vh;
+    padding: 0 8px;
+  }
+
+  /* Brand bar */
+  .brand-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #955b00;
+    padding: 6px 12px;
+    margin: 0 -8px;
+  }
+  .brand-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+  }
+  .brand-title:hover { text-decoration: none; color: #fff; }
+  .auth-btn {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 2px 10px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .auth-btn:hover { border-color: #fff; color: #fff; }
+
+  /* Nav bar */
+  .nav {
+    display: flex;
+    align-items: center;
+    background: #e0e0e0;
+    border-bottom: 1px solid #ccc;
+    margin: 0 -8px;
+  }
+  .nav a {
+    display: block;
+    padding: 4px 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #333 !important;
+    text-decoration: none !important;
+    border-right: 1px solid #ccc;
+  }
+  .nav a:hover { background: #ccc; }
+
+  /* Sub-header */
+  .sub-header {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 11px;
+    font-style: italic;
+    color: #555;
+    padding: 2px 8px;
+    border-bottom: 1px solid #ccc;
+    margin: 0 -8px;
+  }
+
+  /* Section header (brown bar) */
+  .section-header {
+    background: #955b00;
+    padding: 4px 8px;
+    margin-top: 16px;
+    margin-bottom: 0;
+  }
+  .section-header h2 {
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+    border: none;
+  }
+
+  /* Back link */
+  .back-link {
+    display: inline-block;
+    font-size: 12px;
+    margin: 8px 0 4px;
+  }
+
+  /* Player header */
+  .player-name {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 24px;
+    font-weight: 700;
+    border-bottom: 1px solid #ccc;
+    margin: 4px 0 2px;
+    padding-bottom: 2px;
+  }
+  .player-subtitle {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #54595d;
+    margin-bottom: 2px;
+  }
+  .player-quick-stats {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  .player-quick-stats span {
+    margin-right: 16px;
+  }
+
+  /* Table */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12.8px;
+    border: 1px solid #ccc;
+  }
+  th, td {
+    padding: 2px 4px;
+    text-align: left;
+    border: 1px solid #ccc;
+  }
+  th {
+    background: #e3e3e3;
+    font-weight: 700;
+    font-size: 12.8px;
+    cursor: pointer;
+    user-select: none;
+  }
+  th:hover { background: #d5d5d5; }
+  tr.stripe { background: #f2f2f2; }
+  tr:hover { background: #ffffcc; }
+  thead tr:hover { background: #e3e3e3; }
+  .center { text-align: center; }
+  .mono { font-family: monospace; }
+  .bold { font-weight: 700; }
+  .positive { color: #14866d; }
+  .negative { color: #d33; }
+
+  /* Stats table (career stats) */
+  .stats-table {
+    width: auto;
+    margin-bottom: 0;
+  }
+  .stats-table td {
+    padding: 2px 8px;
+  }
+  .stats-label {
+    font-weight: 700;
+    background: #e3e3e3;
+    white-space: nowrap;
+  }
+  .stats-value {
+    font-family: monospace;
+    text-align: right;
+  }
+
+  /* Chart placeholder */
+  .chart-placeholder {
+    border: 1px solid #ccc;
+    background: #fafafa;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 0;
+  }
+
+  .footer {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #54595d;
+    padding: 4px 0;
+  }
+</style>
+</head>
+<body>
+<div class="content-wrapper">
+  <!-- Brand bar -->
+  <div class="brand-row">
+    <a href="#" class="brand-title">LeElo Tracker</a>
+    <a href="#" class="auth-btn">Login</a>
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="#">Player Rankings</a>
+    <a href="#">Games</a>
+    <a href="#">Chemistry</a>
+    <a href="#">Ranks and Badges</a>
+  </nav>
+
+  <!-- Sub-header -->
+  <div class="sub-header">From LeElo, the free basketball statistics database</div>
+
+  <!-- Back link -->
+  <a href="#" class="back-link">&larr; Back to Rankings</a>
+
+  <!-- Player header -->
+  <h1 class="player-name">Marcus Thompson</h1>
+  <div class="player-subtitle">Rank #1 &middot; Elo 1245</div>
+  <div class="player-quick-stats">
+    <span><strong>W-L:</strong> 28-12</span>
+    <span><strong>Win%:</strong> .700</span>
+    <span><strong>GP:</strong> 40</span>
+    <span><strong>Streak:</strong> <span class="positive">W5</span></span>
+  </div>
+
+  <!-- Career Stats -->
+  <div class="section-header">
+    <h2>Career Stats</h2>
+  </div>
+  <table class="stats-table">
+    <tbody>
+      <tr>
+        <td class="stats-label">Wins</td>
+        <td class="stats-value">28</td>
+        <td class="stats-label">Losses</td>
+        <td class="stats-value">12</td>
+        <td class="stats-label">Win%</td>
+        <td class="stats-value">.700</td>
+      </tr>
+      <tr class="stripe">
+        <td class="stats-label">Games</td>
+        <td class="stats-value">40</td>
+        <td class="stats-label">Peak Elo</td>
+        <td class="stats-value">1262</td>
+        <td class="stats-label">Current</td>
+        <td class="stats-value">1245</td>
+      </tr>
+      <tr>
+        <td class="stats-label">Start</td>
+        <td class="stats-value">1000</td>
+        <td class="stats-label">Best Streak</td>
+        <td class="stats-value positive">W8</td>
+        <td class="stats-label">Worst Streak</td>
+        <td class="stats-value negative">L3</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Elo Chart -->
+  <div class="section-header">
+    <h2>Elo Rating Over Time</h2>
+  </div>
+  <div class="chart-placeholder">[Elo line chart placeholder]</div>
+
+  <!-- Game History -->
+  <div class="section-header">
+    <h2>Game History</h2>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Result</th>
+        <th class="center">Score</th>
+        <th>Team</th>
+        <th>Opponent</th>
+        <th class="center">Elo</th>
+        <th class="center">+/-</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Feb 8, 2026</td>
+        <td class="positive bold">W</td>
+        <td class="center mono">21-15</td>
+        <td>Thompson, Williams, Chen</td>
+        <td>Rivera, Park, Hassan</td>
+        <td class="center mono">1245</td>
+        <td class="center mono positive">+18</td>
+      </tr>
+      <tr class="stripe">
+        <td>Feb 6, 2026</td>
+        <td class="positive bold">W</td>
+        <td class="center mono">21-17</td>
+        <td>Thompson, Rivera, Nguyen</td>
+        <td>Williams, Kim, Foster</td>
+        <td class="center mono">1227</td>
+        <td class="center mono positive">+12</td>
+      </tr>
+      <tr>
+        <td>Feb 4, 2026</td>
+        <td class="positive bold">W</td>
+        <td class="center mono">21-19</td>
+        <td>Thompson, Kim, Lee</td>
+        <td>Chen, Park, Hassan</td>
+        <td class="center mono">1215</td>
+        <td class="center mono positive">+8</td>
+      </tr>
+      <tr class="stripe">
+        <td>Feb 2, 2026</td>
+        <td class="positive bold">W</td>
+        <td class="center mono">21-12</td>
+        <td>Thompson, Williams, Foster</td>
+        <td>Rivera, Nguyen, Lee</td>
+        <td class="center mono">1207</td>
+        <td class="center mono positive">+22</td>
+      </tr>
+      <tr>
+        <td>Jan 31, 2026</td>
+        <td class="positive bold">W</td>
+        <td class="center mono">21-16</td>
+        <td>Thompson, Chen, Park</td>
+        <td>Williams, Hassan, Kim</td>
+        <td class="center mono">1185</td>
+        <td class="center mono positive">+15</td>
+      </tr>
+      <tr class="stripe">
+        <td>Jan 28, 2026</td>
+        <td class="negative bold">L</td>
+        <td class="center mono">18-21</td>
+        <td>Thompson, Lee, Nguyen</td>
+        <td>Williams, Rivera, Chen</td>
+        <td class="center mono">1170</td>
+        <td class="center mono negative">-14</td>
+      </tr>
+      <tr>
+        <td>Jan 25, 2026</td>
+        <td class="positive bold">W</td>
+        <td class="center mono">21-14</td>
+        <td>Thompson, Williams, Hassan</td>
+        <td>Chen, Foster, Lee</td>
+        <td class="center mono">1184</td>
+        <td class="center mono positive">+19</td>
+      </tr>
+      <tr class="stripe">
+        <td>Jan 22, 2026</td>
+        <td class="negative bold">L</td>
+        <td class="center mono">16-21</td>
+        <td>Thompson, Park, Kim</td>
+        <td>Williams, Rivera, Nguyen</td>
+        <td class="center mono">1165</td>
+        <td class="center mono negative">-16</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="footer">40 games played</div>
+</div>
+</body>
+</html>

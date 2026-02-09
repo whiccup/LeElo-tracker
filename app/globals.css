@@ -1,10 +1,14 @@
 :root {
   /* Colors - Background */
-  --bg-primary: #f6f6f6;
+  --bg-primary: #eee;
   --bg-secondary: #ffffff;
-  --bg-table-stripe: #f9f9f9;
+  --bg-table-stripe: #f2f2f2;
   --bg-table-header: #e3e3e3;
   --bg-row-hover: #ffffcc;
+  --bg-brand: #955b00;
+
+  /* Colors - Brand */
+  --text-brand: #ffffff;
 
   /* Colors - Text */
   --text-primary: #202122;
@@ -19,8 +23,8 @@
   --accent-orange: #D47735;
 
   /* Colors - Borders */
-  --border-default: #a2a9b1;
-  --border-strong: #a2a9b1;
+  --border-default: #ccc;
+  --border-strong: #ccc;
 
   /* Typography - Families */
   --font-sans: 'Georgia', 'Times New Roman', serif;
@@ -137,18 +141,26 @@ th {
   margin: 0 auto;
   padding: 0 8px;
   border-left: 1px solid var(--border-default);
+  border-right: 1px solid var(--border-default);
   background: var(--bg-secondary);
   min-height: 100vh;
 }
 
 /* Section header */
 .section-header {
+  background: var(--bg-brand);
+  padding: 4px 8px;
   margin-top: 16px;
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
 
 .section-header h2 {
+  color: var(--text-brand);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: var(--font-bold);
   margin: 0;
+  border-bottom: none;
 }
 
 .section-meta {

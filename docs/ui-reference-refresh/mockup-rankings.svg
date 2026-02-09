@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <rect width="1200" height="900" fill="#ececec"/>
+  <rect x="10" y="10" width="1180" height="84" fill="#955b00"/>
+  <text x="30" y="62" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700" fill="#ffffff">LeElo Tracker</text>
+
+  <text x="36" y="150" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="700" fill="#111">2025-26 League Standings</text>
+  <text x="40" y="190" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#1a45a8" text-decoration="underline">Summary</text>
+  <text x="180" y="190" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#1a45a8" text-decoration="underline">Schedule</text>
+  <text x="360" y="190" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#1a45a8" text-decoration="underline">Games</text>
+  <text x="500" y="190" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#1a45a8" text-decoration="underline">Players</text>
+
+  <rect x="40" y="230" width="520" height="590" fill="#ffffff" stroke="#888"/>
+  <rect x="640" y="230" width="520" height="590" fill="#ffffff" stroke="#888"/>
+
+  <rect x="40" y="230" width="520" height="56" fill="#e6e6e6" stroke="#888"/>
+  <rect x="640" y="230" width="520" height="56" fill="#e6e6e6" stroke="#888"/>
+
+  <text x="60" y="268" font-family="Arial" font-size="34" font-weight="700" fill="#8c0000">East</text>
+  <text x="460" y="268" font-family="Arial" font-size="30" font-weight="700" fill="#8c0000">W</text>
+  <text x="515" y="268" font-family="Arial" font-size="30" font-weight="700" fill="#8c0000">L</text>
+
+  <text x="660" y="268" font-family="Arial" font-size="34" font-weight="700" fill="#8c0000">West</text>
+  <text x="1060" y="268" font-family="Arial" font-size="30" font-weight="700" fill="#8c0000">W</text>
+  <text x="1115" y="268" font-family="Arial" font-size="30" font-weight="700" fill="#8c0000">L</text>
+
+  <g font-family="Arial" font-size="32" fill="#1a45a8" text-decoration="underline">
+    <text x="55" y="330">DET (1)</text><text x="655" y="330">OKC (1)</text>
+    <text x="55" y="390">NYK (2)</text><text x="655" y="390">SAS (2)</text>
+    <text x="55" y="450">BOS (3)</text><text x="655" y="450">DEN (3)</text>
+    <text x="55" y="510">CLE (4)</text><text x="655" y="510">LAL (4)</text>
+    <text x="55" y="570">TOR (5)</text><text x="655" y="570">HOU (5)</text>
+    <text x="55" y="630">PHI (6)</text><text x="655" y="630">MIN (6)</text>
+    <text x="55" y="690">ORL (7)</text><text x="655" y="690">PHO (7)</text>
+    <text x="55" y="750">MIA (8)</text><text x="655" y="750">GSW (8)</text>
+    <text x="55" y="810">ATL (9)</text><text x="655" y="810">LAC (9)</text>
+  </g>
+
+  <g font-family="Arial" font-size="32" fill="#111">
+    <text x="455" y="330">38</text><text x="510" y="330">13</text>
+    <text x="455" y="390">34</text><text x="510" y="390">19</text>
+    <text x="455" y="450">34</text><text x="510" y="450">19</text>
+    <text x="455" y="510">32</text><text x="510" y="510">21</text>
+    <text x="455" y="570">32</text><text x="510" y="570">22</text>
+    <text x="455" y="630">30</text><text x="510" y="630">22</text>
+    <text x="455" y="690">27</text><text x="510" y="690">24</text>
+    <text x="455" y="750">28</text><text x="510" y="750">26</text>
+    <text x="455" y="810">26</text><text x="510" y="810">28</text>
+
+    <text x="1055" y="330">40</text><text x="1110" y="330">13</text>
+    <text x="1055" y="390">36</text><text x="1110" y="390">16</text>
+    <text x="1055" y="450">34</text><text x="1110" y="450">19</text>
+    <text x="1055" y="510">32</text><text x="1110" y="510">19</text>
+    <text x="1055" y="570">32</text><text x="1110" y="570">19</text>
+    <text x="1055" y="630">32</text><text x="1110" y="630">22</text>
+    <text x="1055" y="690">31</text><text x="1110" y="690">22</text>
+    <text x="1055" y="750">28</text><text x="1110" y="750">25</text>
+    <text x="1055" y="810">25</text><text x="1110" y="810">27</text>
+  </g>
+
+  <g stroke="#b5b5b5" stroke-width="1">
+    <line x1="40" y1="286" x2="560" y2="286"/>
+    <line x1="640" y1="286" x2="1160" y2="286"/>
+    <line x1="430" y1="230" x2="430" y2="820"/>
+    <line x1="495" y1="230" x2="495" y2="820"/>
+    <line x1="1040" y1="230" x2="1040" y2="820"/>
+    <line x1="1105" y1="230" x2="1105" y2="820"/>
+  </g>
+</svg>

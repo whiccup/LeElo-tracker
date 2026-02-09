@@ -30,12 +30,9 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.brandRow}>
-        <div className={styles.brand}>
-          <Link href="/" className={styles.title}>
-            LeElo Tracker
-          </Link>
-          <span className={styles.subtitle}>From LeElo, the free basketball statistics database</span>
-        </div>
+        <Link href="/" className={styles.title}>
+          LeElo Tracker
+        </Link>
         {!isLoading && (
           isAuthenticated ? (
             <button className={styles.authButton} onClick={handleLogout}>
@@ -74,6 +71,7 @@ export default function Header() {
           </>
         )}
       </nav>
+      <div className={styles.subHeader}>From LeElo, the free basketball statistics database</div>
     </header>
   );
 }
