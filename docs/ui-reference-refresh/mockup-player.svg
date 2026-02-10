@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <rect width="1200" height="900" fill="#ececec"/>
+  <rect x="10" y="10" width="1180" height="84" fill="#955b00"/>
+  <text x="30" y="62" font-family="Arial" font-size="48" font-weight="700" fill="#fff">LeElo Tracker</text>
+
+  <text x="34" y="146" font-family="Arial" font-size="30" fill="#1a45a8" text-decoration="underline">&lt; Back to Standings</text>
+  <text x="34" y="204" font-family="Arial" font-size="56" font-weight="700" fill="#111">Jordan Wells</text>
+  <text x="36" y="248" font-family="Arial" font-size="28" fill="#333">Rank #1 • Elo 1687 • Record 24-8 • W5</text>
+
+  <rect x="34" y="278" width="1130" height="2" fill="#8a8a8a"/>
+
+  <text x="36" y="330" font-family="Arial" font-size="40" font-weight="700" fill="#111">Game Log</text>
+
+  <rect x="36" y="352" width="1128" height="476" fill="#fff" stroke="#888"/>
+  <rect x="36" y="352" width="1128" height="54" fill="#e6e6e6" stroke="#888"/>
+
+  <text x="56" y="388" font-family="Arial" font-size="26" font-weight="700" fill="#8c0000">Date</text>
+  <text x="220" y="388" font-family="Arial" font-size="26" font-weight="700" fill="#8c0000">Result</text>
+  <text x="360" y="388" font-family="Arial" font-size="26" font-weight="700" fill="#8c0000">Team</text>
+  <text x="690" y="388" font-family="Arial" font-size="26" font-weight="700" fill="#8c0000">Opponent</text>
+  <text x="980" y="388" font-family="Arial" font-size="26" font-weight="700" fill="#8c0000">Elo</text>
+
+  <g font-family="Arial" font-size="30" fill="#111">
+    <text x="56" y="452">2/1/26</text><text x="220" y="452" fill="#2c7a2c">W</text><text x="360" y="452">Blue Squad</text><text x="690" y="452">Red Dragons</text><text x="980" y="452">1687</text>
+    <text x="56" y="512">1/30/26</text><text x="220" y="512" fill="#2c7a2c">W</text><text x="360" y="512">Blue Squad</text><text x="690" y="512">Green Team</text><text x="980" y="512">1669</text>
+    <text x="56" y="572">1/28/26</text><text x="220" y="572" fill="#2c7a2c">W</text><text x="360" y="572">Blue Squad</text><text x="690" y="572">Yellow Five</text><text x="980" y="572">1647</text>
+    <text x="56" y="632">1/25/26</text><text x="220" y="632" fill="#b22020">L</text><text x="360" y="632">Blue Squad</text><text x="690" y="632">Black Mamba</text><text x="980" y="632">1628</text>
+    <text x="56" y="692">1/23/26</text><text x="220" y="692" fill="#2c7a2c">W</text><text x="360" y="692">Blue Squad</text><text x="690" y="692">White Sox</text><text x="980" y="692">1643</text>
+  </g>
+
+  <g stroke="#b5b5b5" stroke-width="1">
+    <line x1="36" y1="406" x2="1164" y2="406"/>
+    <line x1="190" y1="352" x2="190" y2="828"/>
+    <line x1="330" y1="352" x2="330" y2="828"/>
+    <line x1="660" y1="352" x2="660" y2="828"/>
+    <line x1="940" y1="352" x2="940" y2="828"/>
+  </g>
+</svg>

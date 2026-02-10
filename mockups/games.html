@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeElo Tracker - All Games (Mockup)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, 'Times New Roman', serif; font-size: 14px; line-height: 1.5; color: #202122; background: #eee; }
+  a { color: #0645ad; text-decoration: underline; }
+  a:visited { color: #0b0080; }
+
+  .content-wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    background: #fff;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    min-height: 100vh;
+    padding: 0 8px;
+  }
+
+  /* Brand bar */
+  .brand-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #955b00;
+    padding: 6px 12px;
+    margin: 0 -8px;
+  }
+  .brand-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+  }
+  .brand-title:hover { text-decoration: none; color: #fff; }
+  .auth-btn {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 2px 10px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .auth-btn:hover { border-color: #fff; color: #fff; }
+
+  /* Nav bar */
+  .nav {
+    display: flex;
+    align-items: center;
+    background: #e0e0e0;
+    border-bottom: 1px solid #ccc;
+    margin: 0 -8px;
+  }
+  .nav a {
+    display: block;
+    padding: 4px 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #333 !important;
+    text-decoration: none !important;
+    border-right: 1px solid #ccc;
+  }
+  .nav a:hover { background: #ccc; }
+
+  /* Sub-header */
+  .sub-header {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 11px;
+    font-style: italic;
+    color: #555;
+    padding: 2px 8px;
+    border-bottom: 1px solid #ccc;
+    margin: 0 -8px;
+  }
+
+  /* Section header (brown bar) */
+  .section-header {
+    background: #955b00;
+    padding: 4px 8px;
+    margin-top: 16px;
+    margin-bottom: 0;
+  }
+  .section-header h2 {
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+    border: none;
+  }
+
+  /* Section meta */
+  .section-meta {
+    display: block;
+    font-size: 11px;
+    color: #54595d;
+    padding: 2px 0;
+    margin-bottom: 4px;
+  }
+  .section-meta a { font-size: 11px; }
+
+  /* Table */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12.8px;
+    border: 1px solid #ccc;
+  }
+  th, td {
+    padding: 2px 4px;
+    text-align: left;
+    border: 1px solid #ccc;
+  }
+  th {
+    background: #e3e3e3;
+    font-weight: 700;
+    font-size: 12.8px;
+    cursor: pointer;
+    user-select: none;
+  }
+  th:hover { background: #d5d5d5; }
+  tr.stripe { background: #f2f2f2; }
+  tr:hover { background: #ffffcc; }
+  thead tr:hover { background: #e3e3e3; }
+  .center { text-align: center; }
+  .mono { font-family: monospace; }
+  .bold { font-weight: 700; }
+  .positive { color: #14866d; }
+  .negative { color: #d33; }
+
+  .footer {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #54595d;
+    padding: 4px 0;
+  }
+
+  /* Pagination */
+  .pagination {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    padding: 6px 0;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  .pagination a, .pagination span {
+    padding: 2px 8px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #0645ad;
+    background: #fff;
+  }
+  .pagination span.current {
+    background: #e3e3e3;
+    color: #333;
+    font-weight: 700;
+  }
+  .pagination a:hover {
+    background: #f2f2f2;
+  }
+</style>
+</head>
+<body>
+<div class="content-wrapper">
+  <!-- Brand bar -->
+  <div class="brand-row">
+    <a href="#" class="brand-title">LeElo Tracker</a>
+    <a href="#" class="auth-btn">Login</a>
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="#">Player Rankings</a>
+    <a href="#">Games</a>
+    <a href="#">Chemistry</a>
+    <a href="#">Ranks and Badges</a>
+  </nav>
+
+  <!-- Sub-header -->
+  <div class="sub-header">From LeElo, the free basketball statistics database</div>
+
+  <!-- Section header -->
+  <div class="section-header">
+    <h2>All Games</h2>
+  </div>
+  <span class="section-meta">Last Updated: Feb 9, 2026 <a href="#">[refresh]</a></span>
+
+  <!-- Games table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Team A</th>
+        <th class="center">Score</th>
+        <th>Team B</th>
+        <th class="center">Winner</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Feb 8, 2026</td>
+        <td>Thompson, Williams, Chen</td>
+        <td class="center mono bold">21-15</td>
+        <td>Rivera, Park, Hassan</td>
+        <td class="center bold">A</td>
+      </tr>
+      <tr class="stripe">
+        <td>Feb 6, 2026</td>
+        <td>Thompson, Rivera, Nguyen</td>
+        <td class="center mono bold">21-17</td>
+        <td>Williams, Kim, Foster</td>
+        <td class="center bold">A</td>
+      </tr>
+      <tr>
+        <td>Feb 4, 2026</td>
+        <td>Kim, Lee, Hassan</td>
+        <td class="center mono bold">19-21</td>
+        <td>Thompson, Chen, Park</td>
+        <td class="center bold">B</td>
+      </tr>
+      <tr class="stripe">
+        <td>Feb 2, 2026</td>
+        <td>Thompson, Williams, Foster</td>
+        <td class="center mono bold">21-12</td>
+        <td>Rivera, Nguyen, Lee</td>
+        <td class="center bold">A</td>
+      </tr>
+      <tr>
+        <td>Jan 31, 2026</td>
+        <td>Thompson, Chen, Park</td>
+        <td class="center mono bold">21-16</td>
+        <td>Williams, Hassan, Kim</td>
+        <td class="center bold">A</td>
+      </tr>
+      <tr class="stripe">
+        <td>Jan 28, 2026</td>
+        <td>Williams, Rivera, Chen</td>
+        <td class="center mono bold">21-18</td>
+        <td>Thompson, Lee, Nguyen</td>
+        <td class="center bold">A</td>
+      </tr>
+      <tr>
+        <td>Jan 25, 2026</td>
+        <td>Thompson, Williams, Hassan</td>
+        <td class="center mono bold">21-14</td>
+        <td>Chen, Foster, Lee</td>
+        <td class="center bold">A</td>
+      </tr>
+      <tr class="stripe">
+        <td>Jan 22, 2026</td>
+        <td>Williams, Rivera, Nguyen</td>
+        <td class="center mono bold">21-16</td>
+        <td>Thompson, Park, Kim</td>
+        <td class="center bold">A</td>
+      </tr>
+      <tr>
+        <td>Jan 20, 2026</td>
+        <td>Thompson, Chen, Foster</td>
+        <td class="center mono bold">21-19</td>
+        <td>Park, Hassan, Lee</td>
+        <td class="center bold">A</td>
+      </tr>
+      <tr class="stripe">
+        <td>Jan 18, 2026</td>
+        <td>Rivera, Kim, Nguyen</td>
+        <td class="center mono bold">15-21</td>
+        <td>Thompson, Williams, Chen</td>
+        <td class="center bold">B</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="footer">82 games total</div>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <span class="current">1</span>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">5</a>
+    <a href="#">Next &raquo;</a>
+  </div>
+</div>
+</body>
+</html>

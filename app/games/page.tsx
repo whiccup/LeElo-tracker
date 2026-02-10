@@ -25,8 +25,8 @@ export default async function GamesPage() {
     <main>
       <div className="section-header">
         <h2>All Games</h2>
-        <span className="section-meta">Last Updated: {today} <RefreshButton /></span>
       </div>
+      <span className="section-meta">Last Updated: {today} <RefreshButton /></span>
       <AllGamesTable games={games} nameMap={nameMap} />
     </main>
   );

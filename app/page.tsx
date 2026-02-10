@@ -15,8 +15,8 @@ export default async function HomePage() {
     <main>
       <div className="section-header">
         <h2>Player Rankings</h2>
-        <span className="section-meta">Last Updated: {today} <RefreshButton /></span>
       </div>
+      <span className="section-meta">Last Updated: {today} <RefreshButton /></span>
       <RankingsTable players={players} />
     </main>
   );
