@@ -39,7 +39,8 @@ export function computeComboStats(games: Game[], comboSize: number): ComboStats[
   const results: ComboStats[] = [];
   for (const entry of Array.from(map.values())) {
     const gamesPlayed = entry.wins + entry.losses;
-    if (gamesPlayed < 5) continue;
+    const minGames = comboSize === 3 ? 30 : 20;
+    if (gamesPlayed < minGames) continue;
     results.push({
       playerIds: entry.playerIds,
       gamesPlayed,

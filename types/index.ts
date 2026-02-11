@@ -65,7 +65,7 @@ export interface GameSortConfig {
   direction: SortDirection;
 }
 
-export type AllGamesSortKey = 'date' | 'teamA' | 'score' | 'teamB' | 'winner';
+export type AllGamesSortKey = 'date' | 'teamA' | 'score' | 'teamB';
 
 export interface AllGamesSortConfig {
   key: AllGamesSortKey;

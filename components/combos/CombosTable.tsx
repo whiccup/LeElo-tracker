@@ -128,7 +128,7 @@ export default function CombosTable({ games, nameMap }: Props) {
         </tbody>
       </table>
       <div className={styles.footer}>
-        Showing {sorted.length} combos (min. 5 games)
+        Showing {sorted.length} combos (min. {tab === 'trios' ? 30 : 20} games)
       </div>
     </div>
   );

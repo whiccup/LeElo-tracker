@@ -35,28 +35,27 @@ export default function AllGamesTable({ games, nameMap }: Props) {
     const dir = sortConfig.direction === 'asc' ? 1 : -1;
     const key = sortConfig.key;
 
+    let cmp = 0;
     if (key === 'date') {
-      return a.date.localeCompare(b.date) * dir;
-    }
-    if (key === 'teamA') {
+      cmp = a.date.localeCompare(b.date);
+    } else if (key === 'teamA') {
       const nameA = resolveName(a.teamAPlayers[0] || '');
       const nameB = resolveName(b.teamAPlayers[0] || '');
-      return nameA.localeCompare(nameB) * dir;
-    }
-    if (key === 'teamB') {
+      cmp = nameA.localeCompare(nameB);
+    } else if (key === 'teamB') {
       const nameA = resolveName(a.teamBPlayers[0] || '');
       const nameB = resolveName(b.teamBPlayers[0] || '');
-      return nameA.localeCompare(nameB) * dir;
-    }
-    if (key === 'score') {
+      cmp = nameA.localeCompare(nameB);
+    } else if (key === 'score') {
       const diffA = a.teamAScore - a.teamBScore;
       const diffB = b.teamAScore - b.teamBScore;
-      return (diffA - diffB) * dir;
+      cmp = diffA - diffB;
     }
-    if (key === 'winner') {
-      return a.winner.localeCompare(b.winner) * dir;
-    }
-    return 0;
+
+    if (cmp !== 0) return cmp * dir;
+
+    // Tiebreaker: always order by created_at (newest first)
+    return b.created_at.localeCompare(a.created_at);
   });
 
   const displayed = visibleCount === 'all' ? sorted : sorted.slice(0, visibleCount);
@@ -97,13 +96,6 @@ export default function AllGamesTable({ games, nameMap }: Props) {
               onSort={handleSort}
               align="left"
             />
-            <SortableHeader
-              label="Winner"
-              sortKey="winner"
-              currentKey={sortConfig.key}
-              currentDirection={sortConfig.direction}
-              onSort={handleSort}
-            />
           </tr>
         </thead>
         <tbody>
@@ -121,9 +113,6 @@ export default function AllGamesTable({ games, nameMap }: Props) {
               </td>
               <td className={styles.small}>
                 {game.teamBPlayers.map(resolveName).join(', ')}
-              </td>
-              <td className={`${styles.center} ${styles.mono} ${styles.bold} ${styles.positive}`}>
-                {game.winner}
               </td>
             </tr>
           ))}

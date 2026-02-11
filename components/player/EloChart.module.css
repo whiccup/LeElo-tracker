@@ -9,6 +9,19 @@
   border: 1px solid var(--border-default);
 }
 
+.hitArea {
+  cursor: pointer;
+}
+
+.tooltip {
+  animation: fadeIn 0.15s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .placeholder {
   padding: 8px;
   color: var(--text-secondary);
