@@ -22,11 +22,14 @@ interface GameOption {
 
 export default function EditGamePage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [players, setPlayers] = useState<PlayerOption[]>([]);
   const [games, setGames] = useState<GameOption[]>([]);
   const [selectedGameId, setSelectedGameId] = useState('');
+  const [filterDate, setFilterDate] = useState('');
 
   const [date, setDate] = useState('');
   const [teamA, setTeamA] = useState<string[]>([]);
@@ -104,6 +107,7 @@ export default function EditGamePage() {
   // When a game is selected, populate the form
   const handleGameSelect = (gameId: string) => {
     setSelectedGameId(gameId);
+    setConfirmDelete(false);
     setError('');
     setSuccess('');
 
@@ -124,6 +128,20 @@ export default function EditGamePage() {
       setTeamAScore(String(game.team_a_score));
       setTeamBScore(String(game.team_b_score));
     }
+  };
+
+  const filteredGames = filterDate ? games.filter((g) => g.date === filterDate) : [];
+
+  const handleDateFilter = (newDate: string) => {
+    setFilterDate(newDate);
+    setSelectedGameId('');
+    setDate('');
+    setTeamA([]);
+    setTeamB([]);
+    setTeamAScore('');
+    setTeamBScore('');
+    setError('');
+    setSuccess('');
   };
 
   const assignedIds = new Set([...teamA, ...teamB]);
@@ -219,6 +237,50 @@ export default function EditGamePage() {
     }
   };
 
+  const handleDelete = async () => {
+    if (!selectedGameId) return;
+
+    if (!confirmDelete) {
+      setConfirmDelete(true);
+      return;
+    }
+
+    setIsDeleting(true);
+    setError('');
+    setSuccess('');
+
+    try {
+      const response = await fetch('/api/games', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ gameId: selectedGameId }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error || 'Failed to delete game');
+        setIsDeleting(false);
+        return;
+      }
+
+      setSuccess('Game removed successfully. All Elo ratings have been recalculated.');
+      setGames((prev) => prev.filter((g) => g.id !== selectedGameId));
+      setSelectedGameId('');
+      setConfirmDelete(false);
+      setDate('');
+      setTeamA([]);
+      setTeamB([]);
+      setTeamAScore('');
+      setTeamBScore('');
+      setIsDeleting(false);
+    } catch {
+      setError('An unexpected error occurred');
+      setConfirmDelete(false);
+      setIsDeleting(false);
+    }
+  };
+
   return (
     <main>
       <Link href="/" className={styles.backLink}>
@@ -233,23 +295,44 @@ export default function EditGamePage() {
         <form onSubmit={handleSubmit}>
           <table className={styles.formTable}>
             <tbody>
-              <tr>
-                <td className={styles.labelCell}>Select Game</td>
+              <tr style={{ backgroundColor: 'var(--bg-table-header)' }}>
+                <td className={styles.labelCell}>Filter by Date</td>
                 <td className={styles.inputCell}>
-                  <select
+                  <input
+                    type="date"
+                    value={filterDate}
+                    onChange={(e) => handleDateFilter(e.target.value)}
                     className={styles.input}
-                    value={selectedGameId}
-                    onChange={(e) => handleGameSelect(e.target.value)}
-                  >
-                    <option value="">— Select a game —</option>
-                    {games.map((g) => (
-                      <option key={g.id} value={g.id}>
-                        {formatGameLabel(g)}
-                      </option>
-                    ))}
-                  </select>
+                    style={{ width: '160px' }}
+                  />
                 </td>
               </tr>
+
+              {filterDate && (
+                <tr>
+                  <td className={styles.labelCell}>Select Game</td>
+                  <td className={styles.inputCell}>
+                    {filteredGames.length === 0 ? (
+                      <span style={{ fontStyle: 'italic', color: 'var(--text-tertiary)' }}>
+                        No games on this date
+                      </span>
+                    ) : (
+                      <select
+                        className={styles.input}
+                        value={selectedGameId}
+                        onChange={(e) => handleGameSelect(e.target.value)}
+                      >
+                        <option value="">— Select a game —</option>
+                        {filteredGames.map((g) => (
+                          <option key={g.id} value={g.id}>
+                            {formatGameLabel(g)}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                  </td>
+                </tr>
+              )}
 
               {selectedGameId && (
                 <>
@@ -379,10 +462,35 @@ export default function EditGamePage() {
                       <button
                         type="submit"
                         className={styles.submitButton}
-                        disabled={isSubmitting}
+                        disabled={isSubmitting || isDeleting}
                       >
                         {isSubmitting ? 'Saving...' : 'Save Changes'}
                       </button>
+                      <button
+                        type="button"
+                        className={styles.submitButton}
+                        style={{
+                          marginLeft: '8px',
+                          color: confirmDelete ? '#fff' : 'var(--accent-red)',
+                          background: confirmDelete ? 'var(--accent-red)' : undefined,
+                          borderColor: 'var(--accent-red)',
+                        }}
+                        disabled={isSubmitting || isDeleting}
+                        onClick={handleDelete}
+                      >
+                        {isDeleting ? 'Removing...' : confirmDelete ? 'Confirm Remove' : 'Remove Game'}
+                      </button>
+                      {confirmDelete && (
+                        <button
+                          type="button"
+                          className={styles.submitButton}
+                          style={{ marginLeft: '8px' }}
+                          onClick={() => setConfirmDelete(false)}
+                          disabled={isDeleting}
+                        >
+                          Cancel
+                        </button>
+                      )}
                     </td>
                   </tr>
                 </>

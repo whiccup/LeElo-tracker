@@ -167,6 +167,62 @@ export async function POST(request: Request) {
   }
 }
 
+export async function DELETE(request: Request) {
+  try {
+    const body = await request.json();
+    const { gameId } = body;
+
+    if (!gameId) {
+      return NextResponse.json({ error: 'Game ID is required' }, { status: 400 });
+    }
+
+    // Verify game exists
+    const { data: existingGame } = await supabase
+      .from('games')
+      .select('id')
+      .eq('id', gameId)
+      .single();
+
+    if (!existingGame) {
+      return NextResponse.json({ error: 'Game not found' }, { status: 404 });
+    }
+
+    // Delete game_players rows first (FK constraint)
+    const { error: gpErr } = await supabase
+      .from('game_players')
+      .delete()
+      .eq('game_id', gameId);
+
+    if (gpErr) {
+      console.error('game_players delete error:', gpErr);
+      return NextResponse.json({ error: 'Failed to delete game player records' }, { status: 500 });
+    }
+
+    // Delete the game
+    const { error: gameErr } = await supabase
+      .from('games')
+      .delete()
+      .eq('id', gameId);
+
+    if (gameErr) {
+      console.error('Game delete error:', gameErr);
+      return NextResponse.json({ error: 'Failed to delete game' }, { status: 500 });
+    }
+
+    // Recalculate all Elo from scratch
+    await recalculateAllElo();
+
+    revalidatePath('/');
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('API error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
+
 export async function PUT(request: Request) {
   try {
     const body = await request.json();
