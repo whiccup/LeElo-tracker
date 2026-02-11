@@ -22,6 +22,9 @@ export default function NewGamePage() {
   const [teamB, setTeamB] = useState<string[]>([]);
   const [teamAScore, setTeamAScore] = useState('');
   const [teamBScore, setTeamBScore] = useState('');
+  const [attendeeIds, setAttendeeIds] = useState<string[] | null>(null);
+  const [attendanceLoading, setAttendanceLoading] = useState(false);
+
   useEffect(() => {
     supabase
       .from('players')
@@ -36,9 +39,40 @@ export default function NewGamePage() {
       });
   }, []);
 
+  useEffect(() => {
+    setAttendanceLoading(true);
+    setTeamA([]);
+    setTeamB([]);
+
+    supabase
+      .from('attendance_sessions')
+      .select('id')
+      .eq('date', date)
+      .then(({ data: sessions }) => {
+        if (!sessions || sessions.length === 0) {
+          setAttendeeIds(null);
+          setAttendanceLoading(false);
+          return;
+        }
+        const sessionId = sessions[0].id;
+        supabase
+          .from('attendance_players')
+          .select('player_id')
+          .eq('session_id', sessionId)
+          .then(({ data: records }) => {
+            setAttendeeIds(records ? records.map((r) => r.player_id) : null);
+            setAttendanceLoading(false);
+          });
+      });
+  }, [date]);
+
+  const playerPool = attendeeIds
+    ? players.filter((p) => attendeeIds.includes(p.id))
+    : players;
+
   const assignedIds = new Set([...teamA, ...teamB]);
-  const availableForA = players.filter((p) => !assignedIds.has(p.id));
-  const availableForB = players.filter((p) => !assignedIds.has(p.id));
+  const availableForA = playerPool.filter((p) => !assignedIds.has(p.id));
+  const availableForB = playerPool.filter((p) => !assignedIds.has(p.id));
 
   const handleTeamASelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = Array.from(e.target.selectedOptions, (opt) => opt.value);
@@ -100,8 +134,9 @@ export default function NewGamePage() {
         return;
       }
 
-      // Clear form for next entry
-      setTeamA([]);
+      // Keep winning team as Team A for next game
+      const aWon = Number(teamAScore) > Number(teamBScore);
+      setTeamA(aWon ? teamA : teamB);
       setTeamB([]);
       setTeamAScore('');
       setTeamBScore('');
@@ -137,6 +172,13 @@ export default function NewGamePage() {
                     style={{ width: '160px' }}
                     required
                   />
+                  <div className={attendeeIds ? styles.attendanceActive : styles.attendanceNote}>
+                    {attendanceLoading
+                      ? 'Checking attendance...'
+                      : attendeeIds
+                        ? `Showing ${attendeeIds.length} players from attendance`
+                        : 'No attendance record — showing all players'}
+                  </div>
                 </td>
               </tr>
               <tr>

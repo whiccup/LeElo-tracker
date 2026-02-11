@@ -207,3 +207,17 @@
   width: 55px;
   font-weight: var(--font-bold);
 }
+
+.attendanceNote {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.attendanceActive {
+  font-size: var(--text-xs);
+  color: var(--accent-green);
+  font-style: italic;
+  margin-top: 4px;
+}
