@@ -97,3 +97,13 @@ export interface ReapingPlayer {
   playerId: string;
   excluded: boolean;
 }
+
+export interface AttendanceSession {
+  id: string;
+  date: string;
+}
+
+export interface AttendanceRecord {
+  sessionId: string;
+  playerId: string;
+}

@@ -72,5 +72,7 @@ export const config = {
     '/api/players/:path*',
     '/api/games/:path*',
     '/api/reaping/:path*',
+    '/attendance/:path*',
+    '/api/attendance/:path*',
   ],
 };

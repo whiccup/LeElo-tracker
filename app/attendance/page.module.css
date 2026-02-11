@@ -1,0 +1,6 @@
+.empty {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-top: var(--space-lg);
+  font-family: Arial, Helvetica, sans-serif;
+}

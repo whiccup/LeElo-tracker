@@ -59,6 +59,7 @@ export default function Header() {
         {!isLoading && isAuthenticated && (
           <>
             <Link href="/reaping" className={navClass('/reaping')}>Reaping</Link>
+            <Link href="/attendance" className={navClass('/attendance')}>Attendance</Link>
             <div className={styles.dropdownWrapper} ref={dropdownRef}>
               <button
                 className={styles.dropdownToggle}
@@ -71,6 +72,7 @@ export default function Header() {
                   <Link href="/player/new" className={styles.dropdownLink} onClick={() => setDropdownOpen(false)}>New Player</Link>
                   <Link href="/game/new" className={styles.dropdownLink} onClick={() => setDropdownOpen(false)}>New Game</Link>
                   <Link href="/game/edit" className={styles.dropdownLink} onClick={() => setDropdownOpen(false)}>Edit Game</Link>
+                  <Link href="/attendance/new" className={styles.dropdownLink} onClick={() => setDropdownOpen(false)}>Record Attendance</Link>
                 </div>
               )}
             </div>

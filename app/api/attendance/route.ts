@@ -1,0 +1,98 @@
+import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
+import { supabase } from '@/lib/supabase';
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const { date, playerIds } = body;
+
+    if (!date) {
+      return NextResponse.json({ error: 'Date is required' }, { status: 400 });
+    }
+
+    if (!playerIds || playerIds.length === 0) {
+      return NextResponse.json(
+        { error: 'At least one player is required' },
+        { status: 400 }
+      );
+    }
+
+    const sessionId = `att-${Date.now()}`;
+
+    const { error: sessionErr } = await supabase
+      .from('attendance_sessions')
+      .insert({ id: sessionId, date });
+
+    if (sessionErr) {
+      console.error('Attendance session insert error:', sessionErr);
+      return NextResponse.json(
+        { error: 'Failed to create attendance session' },
+        { status: 500 }
+      );
+    }
+
+    const rows = playerIds.map((playerId: string) => ({
+      session_id: sessionId,
+      player_id: playerId,
+    }));
+
+    const { error: playersErr } = await supabase
+      .from('attendance_players')
+      .insert(rows);
+
+    if (playersErr) {
+      console.error('Attendance players insert error:', playersErr);
+      return NextResponse.json(
+        { error: 'Failed to record attendance players' },
+        { status: 500 }
+      );
+    }
+
+    revalidatePath('/attendance');
+    return NextResponse.json({ success: true, sessionId }, { status: 201 });
+  } catch (error) {
+    console.error('API error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET() {
+  try {
+    const { data: sessions, error: sessionsErr } = await supabase
+      .from('attendance_sessions')
+      .select('id, date')
+      .order('date', { ascending: false });
+
+    if (sessionsErr) {
+      console.error('Fetch sessions error:', sessionsErr);
+      return NextResponse.json(
+        { error: 'Failed to fetch sessions' },
+        { status: 500 }
+      );
+    }
+
+    const { data: records, error: recordsErr } = await supabase
+      .from('attendance_players')
+      .select('session_id, player_id, players(id, first_name, last_name)');
+
+    if (recordsErr) {
+      console.error('Fetch attendance records error:', recordsErr);
+      return NextResponse.json(
+        { error: 'Failed to fetch attendance records' },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ sessions, records });
+  } catch (error) {
+    console.error('API error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
