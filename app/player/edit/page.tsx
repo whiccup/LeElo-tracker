@@ -37,20 +37,20 @@ export default function EditPlayerPage() {
   useEffect(() => {
     supabase
       .from('players')
-      .select('id, first_name, last_name, email, phone, venmo_user, player_notes')
+      .select('*')
       .order('first_name')
       .then(({ data }) => {
         if (data) {
           setPlayers(
-            data.map((p) => ({
+            (data as Record<string, any>[]).map((p) => ({
               id: p.id,
               name: `${p.first_name} ${p.last_name}`,
-              first_name: p.first_name,
-              last_name: p.last_name,
+              first_name: p.first_name || '',
+              last_name: p.last_name || '',
               email: p.email || '',
               phone: p.phone || '',
               venmo_user: p.venmo_user || '',
-              player_notes: p.player_notes || '',
+              player_notes: p.player_notes || p.player_notest || '',
             }))
           );
         }
