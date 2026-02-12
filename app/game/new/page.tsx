@@ -2,7 +2,6 @@
 
 import { useState, useEffect, FormEvent } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import styles from './page.module.css';
 
@@ -12,7 +11,6 @@ interface PlayerOption {
 }
 
 export default function NewGamePage() {
-  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [players, setPlayers] = useState<PlayerOption[]>([]);
@@ -22,7 +20,7 @@ export default function NewGamePage() {
   const [teamB, setTeamB] = useState<string[]>([]);
   const [teamAScore, setTeamAScore] = useState('');
   const [teamBScore, setTeamBScore] = useState('');
-  const [attendeeIds, setAttendeeIds] = useState<string[] | null>(null);
+  const [attendanceQueueIds, setAttendanceQueueIds] = useState<string[] | null>(null);
   const [attendanceLoading, setAttendanceLoading] = useState(false);
 
   useEffect(() => {
@@ -48,26 +46,54 @@ export default function NewGamePage() {
       .from('attendance_sessions')
       .select('id')
       .eq('date', date)
+      .order('id', { ascending: false })
+      .limit(1)
       .then(({ data: sessions }) => {
         if (!sessions || sessions.length === 0) {
-          setAttendeeIds(null);
+          setAttendanceQueueIds(null);
           setAttendanceLoading(false);
           return;
         }
         const sessionId = sessions[0].id;
         supabase
           .from('attendance_players')
-          .select('player_id')
+          .select('player_id, queue_position')
           .eq('session_id', sessionId)
-          .then(({ data: records }) => {
-            setAttendeeIds(records ? records.map((r) => r.player_id) : null);
+          .then(async ({ data: records, error: queueErr }) => {
+            if (queueErr) {
+              const { data: fallbackRecords } = await supabase
+                .from('attendance_players')
+                .select('player_id')
+                .eq('session_id', sessionId);
+
+              setAttendanceQueueIds(
+                fallbackRecords && fallbackRecords.length > 0
+                  ? fallbackRecords.map((r) => r.player_id)
+                  : null
+              );
+              setAttendanceLoading(false);
+              return;
+            }
+
+            const sortedRecords = (records || []).sort((a, b) => {
+              const aPos = typeof a.queue_position === 'number' ? a.queue_position : Number.MAX_SAFE_INTEGER;
+              const bPos = typeof b.queue_position === 'number' ? b.queue_position : Number.MAX_SAFE_INTEGER;
+              if (aPos !== bPos) return aPos - bPos;
+              return a.player_id.localeCompare(b.player_id);
+            });
+
+            setAttendanceQueueIds(
+              sortedRecords.length > 0 ? sortedRecords.map((r) => r.player_id) : null
+            );
             setAttendanceLoading(false);
           });
       });
   }, [date]);
 
-  const playerPool = attendeeIds
-    ? players.filter((p) => attendeeIds.includes(p.id))
+  const playerPool = attendanceQueueIds
+    ? attendanceQueueIds
+        .map((id) => players.find((p) => p.id === id))
+        .filter((p): p is PlayerOption => Boolean(p))
     : players;
 
   const assignedIds = new Set([...teamA, ...teamB]);
@@ -136,8 +162,17 @@ export default function NewGamePage() {
 
       // Keep winning team as Team A for next game
       const aWon = Number(teamAScore) > Number(teamBScore);
-      setTeamA(aWon ? teamA : teamB);
-      setTeamB([]);
+      const winningTeam = aWon ? teamA : teamB;
+      const losingTeam = aWon ? teamB : teamA;
+      const winnerSet = new Set(winningTeam);
+      const loserSet = new Set(losingTeam);
+      const baseQueue = attendanceQueueIds ? attendanceQueueIds : players.map((p) => p.id);
+      const nextTeamB = baseQueue
+        .filter((id) => !winnerSet.has(id) && !loserSet.has(id))
+        .slice(0, 5);
+
+      setTeamA([...winningTeam]);
+      setTeamB(nextTeamB);
       setTeamAScore('');
       setTeamBScore('');
       setIsSubmitting(false);
@@ -172,11 +207,11 @@ export default function NewGamePage() {
                     style={{ width: '160px' }}
                     required
                   />
-                  <div className={attendeeIds ? styles.attendanceActive : styles.attendanceNote}>
+                  <div className={attendanceQueueIds ? styles.attendanceActive : styles.attendanceNote}>
                     {attendanceLoading
                       ? 'Checking attendance...'
-                      : attendeeIds
-                        ? `Showing ${attendeeIds.length} players from attendance`
+                      : attendanceQueueIds
+                        ? `Showing ${attendanceQueueIds.length} players from attendance`
                         : 'No attendance record — showing all players'}
                   </div>
                 </td>

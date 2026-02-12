@@ -106,4 +106,5 @@ export interface AttendanceSession {
 export interface AttendanceRecord {
   sessionId: string;
   playerId: string;
+  queuePosition?: number;
 }

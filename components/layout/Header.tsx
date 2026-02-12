@@ -70,6 +70,7 @@ export default function Header() {
               {dropdownOpen && (
                 <div className={styles.dropdown}>
                   <Link href="/player/new" className={styles.dropdownLink} onClick={() => setDropdownOpen(false)}>New Player</Link>
+                  <Link href="/player/edit" className={styles.dropdownLink} onClick={() => setDropdownOpen(false)}>Edit Player</Link>
                   <Link href="/game/new" className={styles.dropdownLink} onClick={() => setDropdownOpen(false)}>New Game</Link>
                   <Link href="/game/edit" className={styles.dropdownLink} onClick={() => setDropdownOpen(false)}>Edit Game</Link>
                   <Link href="/attendance/new" className={styles.dropdownLink} onClick={() => setDropdownOpen(false)}>Record Attendance</Link>

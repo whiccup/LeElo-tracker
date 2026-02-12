@@ -2,6 +2,12 @@ import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { supabase } from '@/lib/supabase';
 
+function isMissingQueuePositionColumn(message?: string) {
+  if (!message) return false;
+  const m = message.toLowerCase();
+  return m.includes('queue_position') && (m.includes('column') || m.includes('schema cache'));
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -32,6 +38,21 @@ export async function POST(request: Request) {
       );
     }
 
+    const rowsWithQueue = playerIds.map((playerId: string, idx: number) => ({
+      session_id: sessionId,
+      player_id: playerId,
+      queue_position: idx + 1,
+    }));
+
+    const { error: queueInsertErr } = await supabase
+      .from('attendance_players')
+      .insert(rowsWithQueue);
+
+    if (!queueInsertErr) {
+      revalidatePath('/attendance');
+      return NextResponse.json({ success: true, sessionId }, { status: 201 });
+    }
+
     const rows = playerIds.map((playerId: string) => ({
       session_id: sessionId,
       player_id: playerId,
@@ -41,8 +62,8 @@ export async function POST(request: Request) {
       .from('attendance_players')
       .insert(rows);
 
-    if (playersErr) {
-      console.error('Attendance players insert error:', playersErr);
+    if (playersErr || !isMissingQueuePositionColumn(queueInsertErr.message)) {
+      console.error('Attendance players insert error:', playersErr || queueInsertErr);
       return NextResponse.json(
         { error: 'Failed to record attendance players' },
         { status: 500 }
@@ -77,7 +98,7 @@ export async function GET() {
 
     const { data: records, error: recordsErr } = await supabase
       .from('attendance_players')
-      .select('session_id, player_id, players(id, first_name, last_name)');
+      .select('session_id, player_id, queue_position, players(id, first_name, last_name)');
 
     if (recordsErr) {
       console.error('Fetch attendance records error:', recordsErr);

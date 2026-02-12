@@ -67,6 +67,7 @@ export const config = {
   matcher: [
     '/reaping/:path*',
     '/player/new/:path*',
+    '/player/edit/:path*',
     '/game/new/:path*',
     '/game/edit/:path*',
     '/api/players/:path*',
