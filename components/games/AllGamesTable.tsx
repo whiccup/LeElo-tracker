@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Game, AllGamesSortConfig, AllGamesSortKey } from '@/types';
 import { formatDate } from '@/lib/utils';
 import SortableHeader from '@/components/ui/SortableHeader';
@@ -19,6 +19,7 @@ export default function AllGamesTable({ games, nameMap }: Props) {
     direction: 'desc',
   });
   const [visibleCount, setVisibleCount] = useState<number | 'all'>(10);
+  const [page, setPage] = useState(0);
 
   const resolveName = (id: string) => nameMap[id] || id;
 
@@ -58,7 +59,20 @@ export default function AllGamesTable({ games, nameMap }: Props) {
     return b.created_at.localeCompare(a.created_at);
   });
 
-  const displayed = visibleCount === 'all' ? sorted : sorted.slice(0, visibleCount);
+  const pageSize = visibleCount === 'all' ? sorted.length : visibleCount;
+  const totalPages =
+    visibleCount === 'all' || pageSize === 0 ? 1 : Math.ceil(sorted.length / pageSize);
+  const currentPage = Math.min(page, Math.max(totalPages - 1, 0));
+
+  useEffect(() => {
+    setPage((prev) => Math.min(prev, Math.max(totalPages - 1, 0)));
+  }, [totalPages]);
+
+  const startIndex = visibleCount === 'all' ? 0 : currentPage * pageSize;
+  const endIndex = visibleCount === 'all'
+    ? sorted.length
+    : Math.min(startIndex + pageSize, sorted.length);
+  const displayed = sorted.slice(startIndex, endIndex);
 
   return (
     <div className={styles.wrapper}>
@@ -120,24 +134,53 @@ export default function AllGamesTable({ games, nameMap }: Props) {
       </table>
       <div className={styles.footer}>
         <span>
-          Showing {displayed.length} of {games.length} games
+          {displayed.length === 0
+            ? `Showing 0 of ${games.length} games`
+            : `Showing ${startIndex + 1}-${endIndex} of ${games.length} games`}
         </span>
         <span className={styles.footerControls}>
           {PAGE_OPTIONS.map((n) => (
             <button
               key={n}
               className={`${styles.pageBtn} ${visibleCount === n ? styles.pageBtnActive : ''}`}
-              onClick={() => setVisibleCount(n)}
+              onClick={() => {
+                setVisibleCount(n);
+                setPage(0);
+              }}
             >
               {n}
             </button>
           ))}
           <button
             className={`${styles.pageBtn} ${visibleCount === 'all' ? styles.pageBtnActive : ''}`}
-            onClick={() => setVisibleCount('all')}
+            onClick={() => {
+              setVisibleCount('all');
+              setPage(0);
+            }}
           >
             All
           </button>
+          {visibleCount !== 'all' && (
+            <>
+              <button
+                className={styles.pageBtn}
+                onClick={() => setPage((prev) => Math.max(prev - 1, 0))}
+                disabled={currentPage === 0}
+              >
+                Prev
+              </button>
+              <span className={styles.pageIndicator}>
+                {currentPage + 1}/{totalPages}
+              </span>
+              <button
+                className={styles.pageBtn}
+                onClick={() => setPage((prev) => Math.min(prev + 1, totalPages - 1))}
+                disabled={currentPage >= totalPages - 1}
+              >
+                Next
+              </button>
+            </>
+          )}
         </span>
       </div>
     </div>

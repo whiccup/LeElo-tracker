@@ -70,3 +70,14 @@
   text-decoration: none;
   cursor: default;
 }
+
+.pageBtn:disabled {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  cursor: not-allowed;
+}
+
+.pageIndicator {
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+}
