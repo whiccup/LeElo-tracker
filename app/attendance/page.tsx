@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import AttendanceTable from '@/components/attendance/AttendanceTable';
 import RefreshButton from '@/components/ui/RefreshButton';
@@ -53,6 +54,9 @@ export default async function AttendancePage() {
     <main>
       <div className="section-header">
         <h2>Attendance</h2>
+        <Link href="/attendance/edit" className={styles.editLink}>
+          Edit Attendance
+        </Link>
       </div>
       <span className="section-meta">
         Last Updated: {today} <RefreshButton />

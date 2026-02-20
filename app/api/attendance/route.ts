@@ -117,3 +117,94 @@ export async function GET() {
     );
   }
 }
+
+export async function PUT(request: Request) {
+  try {
+    const body = await request.json();
+    const { sessionId, date, playerIds } = body;
+
+    if (!sessionId) {
+      return NextResponse.json({ error: 'Session ID is required' }, { status: 400 });
+    }
+
+    if (!date) {
+      return NextResponse.json({ error: 'Date is required' }, { status: 400 });
+    }
+
+    if (!playerIds || playerIds.length === 0) {
+      return NextResponse.json(
+        { error: 'At least one player is required' },
+        { status: 400 }
+      );
+    }
+
+    const { error: sessionErr } = await supabase
+      .from('attendance_sessions')
+      .update({ date })
+      .eq('id', sessionId);
+
+    if (sessionErr) {
+      console.error('Attendance session update error:', sessionErr);
+      return NextResponse.json(
+        { error: 'Failed to update attendance session' },
+        { status: 500 }
+      );
+    }
+
+    const { error: deleteErr } = await supabase
+      .from('attendance_players')
+      .delete()
+      .eq('session_id', sessionId);
+
+    if (deleteErr) {
+      console.error('Attendance players delete error:', deleteErr);
+      return NextResponse.json(
+        { error: 'Failed to update attendance players' },
+        { status: 500 }
+      );
+    }
+
+    const rowsWithQueue = playerIds.map((playerId: string, idx: number) => ({
+      session_id: sessionId,
+      player_id: playerId,
+      queue_position: idx + 1,
+    }));
+
+    const { error: queueInsertErr } = await supabase
+      .from('attendance_players')
+      .insert(rowsWithQueue);
+
+    if (!queueInsertErr) {
+      revalidatePath('/attendance');
+      revalidatePath('/game/new');
+      return NextResponse.json({ success: true, sessionId });
+    }
+
+    const rows = playerIds.map((playerId: string) => ({
+      session_id: sessionId,
+      player_id: playerId,
+    }));
+
+    const { error: playersErr } = await supabase
+      .from('attendance_players')
+      .insert(rows);
+
+    if (playersErr || !isMissingQueuePositionColumn(queueInsertErr.message)) {
+      console.error('Attendance players update error:', playersErr || queueInsertErr);
+      return NextResponse.json(
+        { error: 'Failed to update attendance players' },
+        { status: 500 }
+      );
+    }
+
+    revalidatePath('/attendance');
+    revalidatePath('/game/new');
+    return NextResponse.json({ success: true, sessionId });
+  } catch (error) {
+    console.error('API error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
