@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import { getLocalISODate } from '@/lib/utils';
 import styles from './page.module.css';
 
 interface PlayerOption {
@@ -12,7 +13,7 @@ interface PlayerOption {
 
 export default function NewAttendancePage() {
   const [players, setPlayers] = useState<PlayerOption[]>([]);
-  const [date, setDate] = useState(() => new Date().toISOString().split('T')[0]);
+  const [date, setDate] = useState(() => getLocalISODate());
   const [selected, setSelected] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');

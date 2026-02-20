@@ -3,6 +3,7 @@
 import { useState, useEffect, FormEvent } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import { getLocalISODate } from '@/lib/utils';
 import styles from './page.module.css';
 
 interface PlayerOption {
@@ -15,7 +16,7 @@ export default function NewGamePage() {
   const [error, setError] = useState('');
   const [players, setPlayers] = useState<PlayerOption[]>([]);
 
-  const [date, setDate] = useState(() => new Date().toISOString().split('T')[0]);
+  const [date, setDate] = useState(() => getLocalISODate());
   const [teamA, setTeamA] = useState<string[]>([]);
   const [teamB, setTeamB] = useState<string[]>([]);
   const [teamAScore, setTeamAScore] = useState('');

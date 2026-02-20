@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import { getLocalISODate } from '@/lib/utils';
 import styles from './page.module.css';
 
 interface PlayerOption {
@@ -18,7 +19,7 @@ interface ReapingResult {
 
 export default function ReapingPage() {
   const [players, setPlayers] = useState<PlayerOption[]>([]);
-  const [date, setDate] = useState(() => new Date().toISOString().split('T')[0]);
+  const [date, setDate] = useState(() => getLocalISODate());
   const [pool, setPool] = useState<string[]>([]);
   const [autoIncludedIds, setAutoIncludedIds] = useState<string[]>([]);
   const [result, setResult] = useState<ReapingResult | null>(null);

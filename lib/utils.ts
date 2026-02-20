@@ -3,6 +3,11 @@ export function formatDate(isoDate: string): string {
   return `${date.getMonth() + 1}/${date.getDate()}`;
 }
 
+export function getLocalISODate(date: Date = new Date()): string {
+  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+  return local.toISOString().slice(0, 10);
+}
+
 export function formatDateLong(isoDate: string): string {
   const date = new Date(isoDate + 'T00:00:00');
   return date.toLocaleDateString('en-US', {
