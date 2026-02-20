@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Game, AllGamesSortConfig, AllGamesSortKey } from '@/types';
-import { formatDate } from '@/lib/utils';
+import { formatDate, formatNameListForDisplay } from '@/lib/utils';
 import SortableHeader from '@/components/ui/SortableHeader';
 import styles from './AllGamesTable.module.css';
 
@@ -22,6 +22,8 @@ export default function AllGamesTable({ games, nameMap }: Props) {
   const [page, setPage] = useState(0);
 
   const resolveName = (id: string) => nameMap[id] || id;
+  const formatTeamNames = (ids: string[]) =>
+    formatNameListForDisplay(ids.map(resolveName)).join(', ');
 
   const handleSort = (key: string) => {
     const sortKey = key as AllGamesSortKey;
@@ -120,13 +122,13 @@ export default function AllGamesTable({ games, nameMap }: Props) {
             >
               <td className={styles.mono}>{formatDate(game.date)}</td>
               <td className={styles.small}>
-                {game.teamAPlayers.map(resolveName).join(', ')}
+                {formatTeamNames(game.teamAPlayers)}
               </td>
               <td className={`${styles.center} ${styles.mono} ${styles.bold}`}>
                 {game.teamAScore} - {game.teamBScore}
               </td>
               <td className={styles.small}>
-                {game.teamBPlayers.map(resolveName).join(', ')}
+                {formatTeamNames(game.teamBPlayers)}
               </td>
             </tr>
           ))}

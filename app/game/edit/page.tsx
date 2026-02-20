@@ -3,6 +3,7 @@
 import { useState, useEffect, FormEvent } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
+import { formatNameListForDisplay } from '@/lib/utils';
 import styles from '../new/page.module.css';
 
 interface PlayerOption {
@@ -99,8 +100,8 @@ export default function EditGamePage() {
   const formatGameLabel = (game: GameOption) => {
     const d = new Date(game.date + 'T00:00:00');
     const dateStr = `${(d.getMonth() + 1).toString().padStart(2, '0')}/${d.getDate().toString().padStart(2, '0')}`;
-    const teamANames = game.teamA.map((id) => getPlayerName(id)).join(', ');
-    const teamBNames = game.teamB.map((id) => getPlayerName(id)).join(', ');
+    const teamANames = formatNameListForDisplay(game.teamA.map((id) => getPlayerName(id))).join(', ');
+    const teamBNames = formatNameListForDisplay(game.teamB.map((id) => getPlayerName(id))).join(', ');
     return `${dateStr} — ${teamANames} vs ${teamBNames} (${game.team_a_score}-${game.team_b_score})`;
   };
 

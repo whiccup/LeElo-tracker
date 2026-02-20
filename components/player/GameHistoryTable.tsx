@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { PlayerGameStats, GameSortConfig, GameSortKey } from '@/types';
-import { formatDate, formatEloChange } from '@/lib/utils';
+import { formatDate, formatEloChange, formatNameListForDisplay } from '@/lib/utils';
 import SortableHeader from '@/components/ui/SortableHeader';
 import styles from './GameHistoryTable.module.css';
 
@@ -86,44 +86,49 @@ export default function GameHistoryTable({ games }: Props) {
           </tr>
         </thead>
         <tbody>
-          {sorted.map((game, index) => (
-            <tr
-              key={game.gameId}
-              className={index % 2 === 1 ? styles.stripe : ''}
-            >
-              <td className={styles.mono}>{formatDate(game.date)}</td>
-              <td
-                className={`${styles.center} ${styles.mono} ${styles.bold} ${
-                  game.result === 'W' ? styles.positive : styles.negative
-                }`}
+          {sorted.map((game, index) => {
+            const teammateNames = formatNameListForDisplay(game.teammates).join(', ');
+            const opponentNames = formatNameListForDisplay(game.opponents).join(', ');
+
+            return (
+              <tr
+                key={game.gameId}
+                className={index % 2 === 1 ? styles.stripe : ''}
               >
-                {game.result}
-              </td>
-              <td className={`${styles.center} ${styles.mono}`}>
-                {game.teamScore} - {game.opponentScore}
-              </td>
-              <td className={styles.small}>
-                {game.teammates.join(', ')}
-              </td>
-              <td className={styles.small}>
-                {game.opponents.join(', ')}
-              </td>
-              <td
-                className={`${styles.center} ${styles.mono} ${
-                  game.eloChange > 0
-                    ? styles.positive
-                    : game.eloChange < 0
-                      ? styles.negative
-                      : ''
-                }`}
-              >
-                {game.eloChange !== 0 ? formatEloChange(game.eloChange) : '-'}
-              </td>
-              <td className={`${styles.center} ${styles.mono} ${styles.bold}`}>
-                {game.eloAfter || '-'}
-              </td>
-            </tr>
-          ))}
+                <td className={styles.mono}>{formatDate(game.date)}</td>
+                <td
+                  className={`${styles.center} ${styles.mono} ${styles.bold} ${
+                    game.result === 'W' ? styles.positive : styles.negative
+                  }`}
+                >
+                  {game.result}
+                </td>
+                <td className={`${styles.center} ${styles.mono}`}>
+                  {game.teamScore} - {game.opponentScore}
+                </td>
+                <td className={styles.small}>
+                  {teammateNames}
+                </td>
+                <td className={styles.small}>
+                  {opponentNames}
+                </td>
+                <td
+                  className={`${styles.center} ${styles.mono} ${
+                    game.eloChange > 0
+                      ? styles.positive
+                      : game.eloChange < 0
+                        ? styles.negative
+                        : ''
+                  }`}
+                >
+                  {game.eloChange !== 0 ? formatEloChange(game.eloChange) : '-'}
+                </td>
+                <td className={`${styles.center} ${styles.mono} ${styles.bold}`}>
+                  {game.eloAfter || '-'}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <div className={styles.footer}>
